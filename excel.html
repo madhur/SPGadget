@@ -1,0 +1,111 @@
+﻿<html>
+    <head>
+        
+		<script type="text/javascript" src="js/jquery-1.10.1.js"></script>
+		<script type="text/javascript" src="js/jquery-ui-1.10.3.custom.js"></script>
+		
+		<script type="text/javascript" src="js/jquery.SPServices-2013.01.js"></script>
+		<script src="js/markup.js" type="text/javascript"></script>
+		<!--<script src="js/knockout.js" type="text/javascript"></script>-->
+		<script type="text/javascript" src="js/lib/accounting.min.js"></script>
+		<script type="text/javascript" src="js/main.js"></script>
+
+		<!--<LINK REL=StyleSheet HREF="css/excel.css" TYPE="text/css" MEDIA=screen>-->
+		<link rel="stylesheet" type="text/css" href="css/theme.css">
+		
+		<script>
+
+		/*$(document).ready(function () {
+    $('.contenttable').accordion({header: '.category', active:false, collapsible:true, heightStyle: "fill", icons: { "header": "defaultIcon", "activeHeader": " selectedIcon" } });
+});*/
+  </script>
+
+    </head>
+    
+    <body id="main" onload="Excelinit()">
+	
+	
+	<div class="box" id="excel">
+
+	<table class="toprow" cellspacing="0px" cellpadding="0px">
+		<tr>
+			<td></td>
+			<td class="header">EXCEL Sticky</td>
+			<td class="refresh"><img id="refreshimg" src="images/refresh.png" height=32 width=32></td>
+		</tr>
+	</table>
+	<table class="statusrow" cellspacing="0px" cellpadding="0px">
+		<tr>
+			<td class="status">Updated: </td>
+			<td><span id="lastrefresh"></span></td>
+		</tr>
+	</table>
+
+	<table cellspacing="0px" cellpadding="0px" class="contenttable" id="accordion">
+		<tbody class="category">
+			<tr bgcolor=rgb(251,245,147) class="contentrow">
+				<td class="arrow">> </td>
+				<td class="content"><a href="javascript:expand();">Approved</a></td>
+				<td class="amount">$ 4,000</td>
+			</tr>
+		</tbody>
+		
+		
+
+	</table>
+
+	
+		
+	
+
+
+	<table class="bottomtable" cellspacing="0" cellpadding="0">
+		<tr class="bottomrow">
+			<td class="footer ideaicon"><img src="images/idea.png" title="Submit new idea!" height=32 width=32 /></td>			
+			<td class="footer helpicon"><img src="images/question.png" title="Browse EXCEL" height=32 width=32 /></td>
+			<td class="browsericon"><img src="images/browser.png" title="Browse EXCEL" height=32 width=32 /></td>
+		</tr>
+	</table>
+
+</div>
+
+        
+		
+
+		   <!--<div id="mainContent">
+				<table>
+				  <tr>
+					<td>
+					  <img src="images/graph.png" alt="Show/Hide Graph" onclick="showFlyout()" style="cursor:pointer" />
+					  <img src="images/refresh.png" alt="Refresh Data" onclick="reload_Page()" style="cursor:pointer" />
+					  <img src="images/web.png" alt="Open EXCEL" onclick="navCodeProject()" style="cursor:pointer" />
+					  
+					</td>
+					<td>
+					  <img id="loadingimage" alt="Loading Image" src="images/ui-anim_basic_16x16.gif" />
+					  <img id="playImage" src="images/play.png" alt="Turn Auto-Refresh On" onclick="playpauseUpdates()" />
+					  <img id="pauseImage" src="images/pause.png" alt="Turn Auto-Refresh Off" onclick="playpauseUpdates()"  />
+					  <img id="helpImage" src="images/help.png"/>
+					</td>
+				  </tr>
+				</table>
+				<hr/>
+				
+				<div id="statuslist">
+					<div id="accordion">
+	  
+					</div>
+				</div>
+
+				<table id="excelTable">
+								  
+						
+					
+				</table>
+
+
+			
+           </div>-->
+      
+    </body>
+</html>

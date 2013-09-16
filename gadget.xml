@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<gadget>
+        <name>EXCEL</name>
+        <namespace>in.co.madhur</namespace>
+        <version>1.0.0.0</version>
+        <author name="Madhur Ahuja">
+                <info url="https://mysites.aexp.com/Person.aspx?accountname=ads%5Cmahuj4" />
+               
+        </author>
+        <copyright>American Express</copyright>
+        <description>EXCEL Gadget</description>-->
+        <!--<icons>
+                <icon height="48" width="48" src="icon.png" />
+        </icons>-->
+        <hosts>
+                <host name="sidebar">
+
+                        <!-- New autoscaleDPI node -->
+                        <autoscaleDPI>true</autoscaleDPI>
+
+                        <base type="HTML" apiVersion="1.0.0" src="excel.html" />
+                        <permissions>Full</permissions>
+                        <platform minPlatformVersion="1.0" />
+                        <!--<defaultImage src="icon.png" />-->
+                </host>
+        </hosts>
+</gadget>
