@@ -173,7 +173,7 @@ cursor:pointer;
 .bottomtable
 {
 height:40px;
-
+background-color:#543930;
 
 }
 .bottomrow
@@ -230,8 +230,9 @@ text-align:center;
 
 .subcategory
 {
-	display:none;
+	display:block;
 }
+
 /*#refreshimg
 {
 padding-right:10px;
