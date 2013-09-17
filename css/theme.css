@@ -2,7 +2,7 @@ body
 {
 	font-weight:bold;
 	font-family:Arial;
-	height:400px;
+	height:100px;
 width:300px;
 padding:0px 0px 0px 0px;
 margin:0px 0px 0px 0px;
@@ -30,10 +30,7 @@ width:100%;
 }
 
 
-.category
-{
-height:500px;
-}
+
 
 .content
 {

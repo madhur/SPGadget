@@ -3,10 +3,11 @@ body
 	font-weight:bold;
 	font-family:Arial;
 	height:400px;
-width:300px;
+width:400px;
 padding:0px 0px 0px 0px;
 margin:0px 0px 0px 0px;
-
+overflow:auto;	
+background-color:color:rgb(167,87,54);
 
 }
 a,img
@@ -99,6 +100,7 @@ color:rgb(117,122,100);
 font-weight:normal;
 	text-align:right;
 	width:90px;
+	border-right:1pt solid rgb(195,195,121);
 
 }
 
@@ -110,7 +112,7 @@ font-weight:normal;
 
 .idearow
 {
-	height:20px;
+	height:60px;
 
 }
 
@@ -234,6 +236,7 @@ text-align:center;
 {
 	display:block;
 }
+
 
 /*#refreshimg
 {

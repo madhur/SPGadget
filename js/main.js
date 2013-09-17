@@ -102,7 +102,8 @@ function init()
 function  getEXCELData()	
 {
 			var myQuery = "<Query><Where><And><Or><Or><Eq><FieldRef Name='Project_x0020_Contact' /><Value Type='Integer'><UserID/></Value></Eq><Eq><FieldRef Name='Project_x0020_Director' /><Value Type='Integer'><UserID/></Value></Eq></Or><Eq><FieldRef Name='Project_x0020_VP' /><Value Type='Integer'><UserID/></Value></Eq></Or><Neq><FieldRef Name='Project_x0020_Status' /><Value Type='Text'>Canceled</Value></Neq></And></Where></Query>";
-			// var myQuery = "<Query><Where><Eq><FieldRef Name='Project_x0020_Contact' /><Value Type='Integer'><UserID/></Value></Eq></Where></Query>";
+			// var myQuery = "<Query><Where><And><Or><Or><Eq><FieldRef Name='Project_x0020_Contact' /><Value Type='Integer'><UserID/></Value></Eq><Eq><FieldRef Name='Project_x0020_Director' /><Value Type='Integer'><UserID/></Value></Eq></Or><Eq><FieldRef Name='Project_x0020_VP' /><Value Type='Integer'><UserID/></Value></Eq></Or><Neq><FieldRef Name='Project_x0020_Status' /><Value Type='Text'>Canceled</Value></Neq></And></Where></Query>";
+			
 
 			
 			$().SPServices(
@@ -110,7 +111,7 @@ function  getEXCELData()
 						operation: "GetListItems",
 						async: false,
 						listName: excelList,
-						CAMLViewFields: "<ViewFields Properties='True'><FieldRef Name='Title' /><FieldRef Name='Project_x0020_Status' /><FieldRef Name='Project_x0020_Director' /><FieldRef Name='Project_x0020_Contact' /><FieldRef Name='Project_x0020_VP' /><FieldRef Name='Estimated_x0020_Savings' /></ViewFields>",
+						CAMLViewFields: "<ViewFields Properties='True'><FieldRef Name='Title' /><FieldRef Name='Project_x0020_Status' /><FieldRef Name='Project_x0020_Director' /><FieldRef Name='Project_x0020_Contact' /><FieldRef Name='Project_x0020_VP' /><FieldRef Name='Estimated_x0020_Savings' /><FieldRef Name='Implementation_x0020_Date' /><FieldRef Name='Revised_x0020_Implementation_x0020_Date' /></ViewFields>",
 						CAMLQuery: myQuery,
 						completefunc: function (xData, Status) 
 						{
@@ -185,7 +186,17 @@ function  getEXCELData()
 								
 							}});
 							
-							
+							$(document).ready(function () 
+							{
+
+	  
+
+								
+								document.body.style.height=100 + $('tbody.category').size()*40;
+  
+  
+							});
+
 							
 						
 							
@@ -228,8 +239,22 @@ function FlyoutLoaded()
   
   var approvedDOM=$(ActiveFlyout).html();
   var flyoutDOM=System.Gadget.Flyout.document.getElementById('faccordion');
-   
+   $(flyoutDOM).empty();
   $(flyoutDOM).append(approvedDOM);
+  
+  
+  $(document).ready(function () 
+							{
+
+	  
+
+								
+								//System.Gadget.Flyout.document.body.style.height=40+ $('tbody.subcategory').size()*40;
+  
+  
+							});
+  
+  
   
 }
 
@@ -268,5 +293,14 @@ function ResizeWindowTo(sElemId) {
     var nWide = oElem.offsetWidth;
     document.body.style.height = nHigh;
     document.body.style.width = nWide;
+}
+
+
+function resize(height, width)
+{
+
+ //document.body.style.height=400;
+ 
+
 }
 
