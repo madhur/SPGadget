@@ -150,7 +150,7 @@ function  getEXCELData()
 								{
 									// console.log(excel.Project_x0020_Status);
 								  
-									$('#accordion').append('<tbody id='+ excel.Project_x0020_Status.replace(/ /g,"_")+' class="category"><tr bgcolor=rgb(251,245,147) class="contentrow"><td class="arrow">> </td><td onclick="javascript:showFlyout('+excel.Project_x0020_Status.replace(/ /g,"_")+'sub)" class="content">'+excel.Project_x0020_Status+'</td><td class="amount">$ 4,000</td></tr></tbody><tbody class="subcategory" id='+excel.Project_x0020_Status.replace(/ /g,"_")+'sub></tbody>');
+									$('#accordion').append('<tbody id='+ excel.Project_x0020_Status.replace(/ /g,"_")+' class="category"><tr bgcolor=rgb(251,245,147) class="contentrow"><td class="arrow">> </td><td onclick="javascript:showFlyout('+excel.Project_x0020_Status.replace(/ /g,"_")+'sub)" class="content">'+excel.Project_x0020_Status+'</td><td class="amount" id="amnt"></td></tr></tbody><tbody class="subcategory" id='+excel.Project_x0020_Status.replace(/ /g,"_")+'sub></tbody>');
 									
 									statuslist.push(excel.Project_x0020_Status.replace(/ /g,"_"));
 									
@@ -158,7 +158,7 @@ function  getEXCELData()
 								}
 								//insert contacts in the accordion
 								// $('#' + excel.Project_x0020_Status.replace(/ /g,"_")).after('<table style="width:100%"><tr><td class="title"><a href="https://teams.aexp.com/sites/teamsitewendy/WASTE/Lists/WASTE%20Ideas/dispform.aspx?ID=' + excel.ID + '">' + excel.Title + '</a></td><td class="amount">$ '+ getMoney(excel.Estimated_x0020_Savings)   +'</td></tr></table>');
-								$('#' + excel.Project_x0020_Status.replace(/ /g,"_") +'sub').append('<tr bgcolor="rgb(251,245,147)" class="idearow"><td class="idea" colspan="2"><a href="https://teams.aexp.com/sites/teamsitewendy/WASTE/Lists/WASTE%20Ideas/dispform.aspx?ID='+ excel.ID+'">'+excel.Title+'</a></td><td class="ideaamount">'+getMoney(excel.Estimated_x0020_Savings)+'</td></tr>');
+								$('#' + excel.Project_x0020_Status.replace(/ /g,"_") +'sub').append('<tr bgcolor="rgb(251,245,147)" class="idearow"><td class="idea" colspan="2"><a href="https://teams.aexp.com/sites/teamsitewendy/WASTE/Lists/WASTE%20Ideas/dispform.aspx?ID='+ excel.ID+'">'+excel.Title+'</a></td><td class="ideaamount">$ '+getMoney(excel.Estimated_x0020_Savings)+'</td></tr>');
 								
 								var previousSum=$('#' + excel.Project_x0020_Status.replace(/ /g,"_")).attr("sum");
 								if (typeof(previousSum) == "undefined")
@@ -169,7 +169,7 @@ function  getEXCELData()
 								
 							});
 							
-								/*$.each(statuslist, function(i,list) 
+								$.each(statuslist, function(i,list) 
 								{
 								
 									var sum=$("#" + list).attr("sum");
@@ -177,14 +177,11 @@ function  getEXCELData()
 									sum= "$ "+ getMoney(sum);
 									// $("#" + list).after("<span style='float:right'>"+sum+"</span>");
 									
-									$("#" + list).nextUntil("h3").wrapAll("<div></div>");
-										
-									$("#" + list).next().append('<table style="width:100%"><tr><td class="title"><b>Total</b></td><td class="amount">' + sum   +'</td></tr></table>');
+									$("#" + list).find('#amnt').html(sum);									
 									
 									
 									
-									
-								});*/
+								});
 								
 							}});
 							
@@ -261,5 +258,15 @@ var n = number,
     dateOfString += (("" + month).length < 2 ? "0" : "") + month + "/";
     dateOfString += date.getFullYear();
     return dateOfString;
+}
+
+function ResizeWindowTo(sElemId) {
+    document.body.leftMargin = 0;
+    document.body.topMargin = 0;
+    var oElem = document.getElementById(sElemId);
+    var nHigh = oElem.offsetHeight;
+    var nWide = oElem.offsetWidth;
+    document.body.style.height = nHigh;
+    document.body.style.width = nWide;
 }
 

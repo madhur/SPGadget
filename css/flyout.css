@@ -74,7 +74,9 @@ width:15px;
 
 .idea
 {
-	margin-left:10px;
+	padding-left:10px;
+	padding-top: 5px;
+	padding-bottom: 5px;
 	
 }
 
