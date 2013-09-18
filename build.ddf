@@ -1,0 +1,62 @@
+.OPTION EXPLICIT
+
+.Set CabinetNameTemplate=EXCEL.gadget
+.Set SourceDir=.; 
+
+.set DiskDirectoryTemplate=CDROM    ; All cabinets go in a single directory
+.Set CompressionType=MSZIP          ; 
+.Set Cabinet=on                     ; 
+.Set Compress=on 
+
+.Set CabinetFileCountThreshold=0 
+.Set FolderFileCountThreshold=0 
+.Set FolderSizeThreshold=0 
+.Set MaxCabinetSize=0 
+.Set MaxDiskFileCount=0
+.Set MaxDiskSize=0
+
+css\flyout.css 	css\flyout.css
+css\theme.css	css\theme.css
+
+
+js\jquery-1.10.2.min.js	js\jquery-1.10.2.min.js
+js\jquery.SPServices-2013.01.min.js	js\jquery.SPServices-2013.01.min.js
+
+
+js\main.js	js\main.js
+js\sugar.min.js	js\sugar.min.js
+
+
+excel.html	excel.html
+flyout.html	flyout.html
+gadget.xml	gadget.xml
+
+
+main.html	main.html
+README.md	README.md
+
+
+images\background.jpg	images\background.jpg
+images\blue_bottom.png	images\blue_bottom.png
+images\blue_high.png	images\blue_high.png
+images\blue_low.png		images\blue_low.png
+images\blue_middle.png	images\blue_middle.png
+images\blue_top.png		images\blue_top.png
+images\bottom-left.png	images\bottom-left.png
+images\bottom-right.png	images\bottom-right.png
+images\browser.png		images\browser.png
+images\graph.png		images\graph.png
+images\help.png			images\help.png
+images\idea.png			images\idea.png
+images\loading.gif		images\loading.gif
+images\pause.png		images\pause.png
+images\play.png			images\play.png
+images\question.png		images\question.png
+images\refresh.png		images\refresh.png
+images\top-left.png		images\top-left.png
+images\top-right.png	images\top-right.png
+images\transparent.png	images\transparent.png
+images\ui-anim_basic_16x16.gif	images\ui-anim_basic_16x16.gif
+images\web.png			images\web.png
+
+
