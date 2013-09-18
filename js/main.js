@@ -9,7 +9,7 @@ $().SPServices.defaults.listName = excelList;  // Name of the list for list
 
 // Enable support of cross domain origin request
 jQuery.support.cors = true;
-var truncatelength=30;
+var truncatelength=50;
 
 // Disable caching of AJAX responses - Stop IE reusing cache data for the same requests
 $.ajaxSetup({
@@ -42,6 +42,8 @@ function refresh()
 
 	$("#refreshimg").attr('src',"images/loading.gif");
 	
+	$('#accordion').empty();
+	
 	var status=getEXCELData();
 
 	if(status=="success")
@@ -53,6 +55,7 @@ function refresh()
 		+ currentdate.getMinutes() + ":"
 		+ currentdate.getSeconds();
 		$('#lastrefresh').html(datetime);
+		
 	}
 	else
 	{
