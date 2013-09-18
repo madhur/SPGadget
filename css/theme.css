@@ -229,6 +229,14 @@ text-align:center;
 {
 	display:none;
 }
+
+.bottomrow img
+{
+
+	height:24px;
+	width:24px;
+
+}
 /*#refreshimg
 {
 padding-right:10px;
