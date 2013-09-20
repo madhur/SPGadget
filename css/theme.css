@@ -238,7 +238,39 @@ text-align:center;
 
 }
 
+#star
+{
+background-color:#543930;
 
+}
+
+#rating
+{
+background-color:#543930;
+height:40px;
+
+}
+.ratetext
+{
+font-size:10px;
+width:25%;
+float:left;
+color:white;
+}
+
+.rateicon
+{
+width:50%;
+font-size:10px;
+text-align:center;
+}
+
+.ratetip
+{
+width:25%;
+font-size:10px;
+float:right;
+}
 
 
 /*#refreshimg

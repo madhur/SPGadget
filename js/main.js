@@ -29,8 +29,10 @@ $(document).ready(function ()
 		refresh();
 		return false;
 	});
-
 	
+	
+	
+	$('#star').raty();
 
 
 });
@@ -150,6 +152,30 @@ includeAllAttrs: true
 				previousSum=Number(previousSum)+Number(excel.Estimated_x0020_Savings);
 				$('#' + excel.Project_x0020_Status.replace(/ /g,"_")).attr("sum",previousSum);
 				
+				//Calculate heat map based on date
+				var impDate
+				if(excel.Project_x0020_Status=="In Progress")
+				{
+						if(excel.Revised_x0020_Implementation_x0020_Date !="undefined")
+						{
+							impDate=excel.Revised_x0020_Implementation_x0020_Date;
+						}
+						else
+						{
+							if(excel.Implementation_x0020_Date !="undefined")
+							{
+								impDate=excel.Implementation_x0020_Date;
+							}
+							else
+							{
+								//error condition, no date defined
+								
+							}
+						
+						}
+				}
+				
+				
 			});
 			
 			$.each(statuslist, function(i,list) 
@@ -207,16 +233,15 @@ function FlyoutLoaded()
 
 	$(document).ready(function () 
 	{
-		//System.Gadget.Flyout.document.body.style.height=40+ $('tbody.subcategory').size()*40;
+		System.Gadget.Flyout.document.body.style.height=40+ ($('#'+ ActiveFlyout).children().size())*40;
+		//$(flyoutDOM).append($('#'+ ActiveFlyout).children().size());
+		
+		var heading=System.Gadget.Flyout.document.getElementById('heading');
+		$(heading).html('<h1>'+$('#'+ ActiveFlyout).children().size()+'</h1>');
+		//System.Gadget.Flyout.document.body.style.height=600;
 
 	});
 }
-
-
-function navCodeProject() {
-	window.open("https://teams.aexp.com/sites/teamsitewendy/WASTE/SitePages/My%20WASTE%20Home.aspx");
-}
-
 
 function getMoney(number){
 	var n = number, 
@@ -256,5 +281,17 @@ function resize(height, width)
 	//document.body.style.height=400;
 
 
+}
+
+
+function rateit()
+{
+var body=document.body;
+
+ $(body).animate( {height:260},1000, function() {
+    // Animation complete.
+	
+  });
+  
 }
 

@@ -4,11 +4,13 @@
 		<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>		
 		
 		<script type="text/javascript" src="js/jquery.SPServices-2013.01.min.js"></script>
-		<script src="js/markup.js" type="text/javascript"></script>
+		
 		<!--<script src="js/knockout.js" type="text/javascript"></script>-->
 		<script type="text/javascript" src="js/lib/accounting.min.js"></script>
 		<script type="text/javascript" src="js/sugar.min.js"></script>
+			<script type="text/javascript" src="js/jquery.raty.min.js"></script>
 		<script type="text/javascript" src="js/main.js"></script>
+	
 
 		<!--<LINK REL=StyleSheet HREF="css/excel.css" TYPE="text/css" MEDIA=screen>-->
 		<link rel="stylesheet" type="text/css" href="css/theme.css">
@@ -40,7 +42,7 @@
 		
 
 	</table>
-
+	
 	
 		
 	
@@ -49,11 +51,15 @@
 	<table class="bottomtable" cellspacing="0" cellpadding="0">
 		<tr class="bottomrow">
 			<td class="footer ideaicon"><a href="https://teams.aexp.com/sites/teamsitewendy/WASTE/_layouts/listform.aspx?PageType=8&ListId={68BAA1F6-7B43-4AAF-B821-B9575C263044}&RootFolder="><img src="images/idea.png" title="Submit new idea!"/></a></td>			
-			<td class="footer helpicon"><img src="images/question.png" title="EXCEL Gadget FAQ"/></td>
+			<td class="footer helpicon"><a href="javascript:rateit()"><img src="images/question.png" title="EXCEL Gadget FAQ"/></a></td>
 			<td class="browsericon"><a href="https://teams.aexp.com/sites/teamsitewendy/WASTE/SitePages/My%20WASTE%20Home.aspx"><img src="images/browser.png" title="Browse EXCEL" /></a></td>
 		</tr>
 	</table>
-
+	<div id="rating">
+			<div class="ratetext">Rate this gadget:</div>			
+			<div id="star"></div>
+			<div class="ratetip"></div>
+	</div>
 </div>
 
       
