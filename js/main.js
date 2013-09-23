@@ -3,13 +3,14 @@ var excelList="EXCEL Ideas";
 var getListItems="GetListItems";
 
 var ActiveFlyout;
+var ActiveCategory;
 
 $().SPServices.defaults.webURL = "https://teams.aexp.com/sites/teamsitewendy/WASTE";  // URL of the target Web
 $().SPServices.defaults.listName = excelList;  // Name of the list for list 
 
 // Enable support of cross domain origin request
 jQuery.support.cors = true;
-var truncatelength=50;
+var truncatelength=30;
 
 // Disable caching of AJAX responses - Stop IE reusing cache data for the same requests
 $.ajaxSetup({
@@ -103,7 +104,7 @@ function  getEXCELData()
 operation: "GetListItems",
 async: false,
 listName: excelList,
-CAMLViewFields: "<ViewFields Properties='True'><FieldRef Name='Title' /><FieldRef Name='Project_x0020_Status' /><FieldRef Name='Project_x0020_Director' /><FieldRef Name='Project_x0020_Contact' /><FieldRef Name='Project_x0020_VP' /><FieldRef Name='Estimated_x0020_Savings' /><FieldRef Name='Implementation_x0020_Date' /><FieldRef Name='Revised_x0020_Implementation_x0020_Date' /></ViewFields>",
+CAMLViewFields: "<ViewFields Properties='True'><FieldRef Name='Title' /><FieldRef Name='Project_x0020_Status' /><FieldRef Name='Project_x0020_Director' /><FieldRef Name='Project_x0020_Contact' /><FieldRef Name='Project_x0020_VP' /><FieldRef Name='Estimated_x0020_Savings' /><FieldRef Name='Planned_x0020_Implementation_x00' /><FieldRef Name='Revised_x0020_Implementation_x00' /></ViewFields>",
 CAMLQuery: myQuery,
 completefunc: function (xData, Status) 
 		{
@@ -196,9 +197,13 @@ includeAllAttrs: true
 	
 	$(document).ready(function () 
 	{
+		var body=document.body;
+		var height=100+ $('tbody.category').size()*40;
 		
-		document.body.style.height=100 + $('tbody.category').size()*40;
-
+		
+		// document.body.style.height=100 + $('tbody.category').size()*40;
+		
+		setBodyHeight(body,height);
 	});
 	
 	return "success"
@@ -209,7 +214,11 @@ includeAllAttrs: true
 // --------------------------------------------------------------------
 function showFlyout(status) 
 {
-	ActiveFlyout=status
+	ActiveFlyout=status;
+	var index=status.id.indexOf("sub");
+	if(index!=-1)
+	ActiveCategory=status.id.substring(0,index).replace(/_/g," ");
+	
 	var IsGadget = (window.System != undefined);
 	if(IsGadget)
 	{
@@ -231,16 +240,22 @@ function FlyoutLoaded()
 	$(flyoutDOM).append(approvedDOM);
 
 
-	$(document).ready(function () 
-	{
-		System.Gadget.Flyout.document.body.style.height=40+ ($('#'+ ActiveFlyout).children().size())*40;
+	
+		
 		//$(flyoutDOM).append($('#'+ ActiveFlyout).children().size());
 		
 		var heading=System.Gadget.Flyout.document.getElementById('heading');
-		$(heading).html('<h1>'+$('#'+ ActiveFlyout).children().size()+'</h1>');
+		//$(heading).html('<h1>5</h1>');
+		 var size=$(flyoutDOM).find('tr').size()
+		$(heading).html(size +' ideas in '+ActiveCategory.valueOf() );
+		
+		
+		var body=System.Gadget.Flyout.document.body;
+		var height=40+size*25;
+		
+		setBodyHeight(body, height);
 		//System.Gadget.Flyout.document.body.style.height=600;
 
-	});
 }
 
 function getMoney(number){
@@ -286,12 +301,21 @@ function resize(height, width)
 
 function rateit()
 {
-var body=document.body;
+	//var body=document.body;
+	//setBodyHeight(body,260);
 
- $(body).animate( {height:260},1000, function() {
+  
+}
+
+function setBodyHeight(body, height)
+{
+	
+
+  $(body).animate( {height:height},1000, function() {
     // Animation complete.
 	
   });
   
+
 }
 

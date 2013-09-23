@@ -2,7 +2,7 @@ body
 {
 	font-weight:bold;
 	font-family:Arial;
-	height:100px;
+	height:40px;
 width:400px;
 padding:0px 0px 0px 0px;
 margin:0px 0px 0px 0px;
@@ -236,7 +236,11 @@ text-align:center;
 {
 	display:block;
 }
+#heading
+{
 
+	color:white;
+}
 
 
 /*#refreshimg
