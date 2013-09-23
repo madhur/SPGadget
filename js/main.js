@@ -62,7 +62,7 @@ function refresh()
 	}
 	else
 	{
-		$('#lastrefresh').html("Error");
+		$('#lastrefresh').html("Error retrieving data");
 		
 	}
 	
@@ -94,8 +94,11 @@ function init()
 
 function  getEXCELData()	
 {
-	var myQuery = "<Query><Where><And><Or><Or><Eq><FieldRef Name='Project_x0020_Contact' /><Value Type='Integer'><UserID/></Value></Eq><Eq><FieldRef Name='Project_x0020_Director' /><Value Type='Integer'><UserID/></Value></Eq></Or><Eq><FieldRef Name='Project_x0020_VP' /><Value Type='Integer'><UserID/></Value></Eq></Or><Neq><FieldRef Name='Project_x0020_Status' /><Value Type='Text'>Canceled</Value></Neq></And></Where></Query>";
-	// var myQuery = "<Query><Where><And><Or><Or><Eq><FieldRef Name='Project_x0020_Contact' /><Value Type='Integer'><UserID/></Value></Eq><Eq><FieldRef Name='Project_x0020_Director' /><Value Type='Integer'><UserID/></Value></Eq></Or><Eq><FieldRef Name='Project_x0020_VP' /><Value Type='Integer'><UserID/></Value></Eq></Or><Neq><FieldRef Name='Project_x0020_Status' /><Value Type='Text'>Canceled</Value></Neq></And></Where></Query>";
+
+var functionStatus;
+//	var myQuery = "<Query><Where><And><Or><Or><Eq><FieldRef Name='Project_x0020_Contact' /><Value Type='Integer'><UserID/></Value></Eq><Eq><FieldRef Name='Project_x0020_Director' /><Value Type='Integer'><UserID/></Value></Eq></Or><Eq><FieldRef Name='Project_x0020_VP' /><Value Type='Integer'><UserID/></Value></Eq></Or><Neq><FieldRef Name='Project_x0020_Status' /><Value Type='Text'>Canceled</Value></Neq></And></Where></Query>";
+	var myQuery = "<Query><Where><And><Or><Or><Eq><FieldRef Name='Project_x0020_Contact' /><Value Type='Integer'><UserID/></Value></Eq><Eq><FieldRef Name='Project_x0020_Director' /><Value Type='Integer'><UserID/></Value></Eq></Or><Eq><FieldRef Name='Project_x0020_VP' /><Value Type='Text'>Shuchi S Dikshit</Value></Eq></Or><Neq><FieldRef Name='Project_x0020_Status' /><Value Type='Text'>Canceled</Value></Neq></And></Where></Query>";
+	 
 	
 
 	
@@ -108,10 +111,14 @@ CAMLViewFields: "<ViewFields Properties='True'><FieldRef Name='Title' /><FieldRe
 CAMLQuery: myQuery,
 completefunc: function (xData, Status) 
 		{
-			if (Status == "Error")
+			if (Status == "error")
 			{
 				
-				return "error";
+				functionStatus="error";
+			}
+			else
+			{
+				functionStatus="success";
 			}
 			// alert(Status);
 			var resJson=$(xData.responseXML).SPFilterNode("z:row").SPXmlToJson(
@@ -136,7 +143,7 @@ includeAllAttrs: true
 				{
 					// console.log(excel.Project_x0020_Status);
 					
-					$('#accordion').append('<tbody id='+ excel.Project_x0020_Status.replace(/ /g,"_")+' class="category"><tr bgcolor=rgb(251,245,147) class="contentrow"><td class="arrow">> </td><td onclick="javascript:showFlyout('+excel.Project_x0020_Status.replace(/ /g,"_")+'sub)" class="content">'+excel.Project_x0020_Status+'</td><td class="amount" id="amnt"></td></tr></tbody><tbody class="subcategory" id='+excel.Project_x0020_Status.replace(/ /g,"_")+'sub></tbody>');
+					$('#accordion').append('<tbody id='+ excel.Project_x0020_Status.replace(/ /g,"_")+' class="category"><tr class="contentrow"><td class="arrow">> </td><td onclick="javascript:showFlyout('+excel.Project_x0020_Status.replace(/ /g,"_")+'sub)" class="content">'+excel.Project_x0020_Status+'</td><td class="amount" id="amnt"></td></tr></tbody><tbody class="subcategory" id='+excel.Project_x0020_Status.replace(/ /g,"_")+'sub></tbody>');
 					
 					statuslist.push(excel.Project_x0020_Status.replace(/ /g,"_"));
 					
@@ -144,7 +151,7 @@ includeAllAttrs: true
 				}
 				//insert contacts in the accordion
 				// $('#' + excel.Project_x0020_Status.replace(/ /g,"_")).after('<table style="width:100%"><tr><td class="title"><a href="https://teams.aexp.com/sites/teamsitewendy/WASTE/Lists/WASTE%20Ideas/dispform.aspx?ID=' + excel.ID + '">' + excel.Title + '</a></td><td class="amount">$ '+ getMoney(excel.Estimated_x0020_Savings)   +'</td></tr></table>');
-				$('#' + excel.Project_x0020_Status.replace(/ /g,"_") +'sub').append('<tr bgcolor="rgb(251,245,147)" class="idearow"><td class="idea" colspan="2"><a href="https://teams.aexp.com/sites/teamsitewendy/WASTE/Lists/WASTE%20Ideas/dispform.aspx?ID='+ excel.ID+'">'+excel.Title.truncateOnWord(truncatelength)+'</a></td><td class="ideaamount">$ '+getMoney(excel.Estimated_x0020_Savings)+'</td></tr>');
+				$('#' + excel.Project_x0020_Status.replace(/ /g,"_") +'sub').append('<tr id=' + excel.ID + ' class="idearow"><td class="idea" colspan="2"><a href="https://teams.aexp.com/sites/teamsitewendy/WASTE/Lists/WASTE%20Ideas/dispform.aspx?ID='+ excel.ID+'">'+excel.Title.truncateOnWord(truncatelength)+'</a></td><td class="ideaamount">$ '+getMoney(excel.Estimated_x0020_Savings)+'</td></tr>');
 				
 				var previousSum=$('#' + excel.Project_x0020_Status.replace(/ /g,"_")).attr("sum");
 				if (typeof(previousSum) == "undefined")
@@ -157,23 +164,45 @@ includeAllAttrs: true
 				var impDate
 				if(excel.Project_x0020_Status=="In Progress")
 				{
-						if(excel.Revised_x0020_Implementation_x0020_Date !="undefined")
+						if(excel.Revised_x0020_Implementation_x00 !== undefined)
 						{
-							impDate=excel.Revised_x0020_Implementation_x0020_Date;
+							impDate=excel.Revised_x0020_Implementation_x00;
 						}
 						else
 						{
-							if(excel.Implementation_x0020_Date !="undefined")
+							if(excel.Planned_x0020_Implementation_x00 !== undefined)
 							{
-								impDate=excel.Implementation_x0020_Date;
+								impDate=excel.Planned_x0020_Implementation_x00;
 							}
 							else
 							{
-								//error condition, no date defined
+								//error condition, no date defined .... Do nothing
 								
 							}
 						
 						}
+						
+						
+						var color;
+						var ideaDate=Date.parse(impDate);												
+						
+						if(Date.today().isAfter(ideaDate))
+						{
+						
+							color="red";
+							$('#' + excel.ID).addClass("red");
+							
+						}
+						else if(Date.today().add(30).days().isAfter(ideaDate))
+						{
+						
+							color="orange";
+							$('#' +  excel.ID).addClass("orange");
+						}
+						
+						
+						
+						
 				}
 				
 				
@@ -193,6 +222,8 @@ includeAllAttrs: true
 				
 			});
 			
+			
+			
 		}});
 	
 	$(document).ready(function () 
@@ -206,7 +237,7 @@ includeAllAttrs: true
 		setBodyHeight(body,height);
 	});
 	
-	return "success"
+	return functionStatus;
 }
 
 // --------------------------------------------------------------------

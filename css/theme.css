@@ -82,7 +82,7 @@ padding-right:10px;
 color:rgb(117,122,100);
 font-weight:normal;
 	text-align:right;
-	width:90px;
+	width:110px;
 
 }
 
@@ -101,6 +101,7 @@ font-weight:normal;
 .contentrow
 {
 	height:40px;
+		background-color:rgb(251,245,147);
 }
 
 .idearow

@@ -88,7 +88,7 @@ padding-right:10px;
 color:rgb(117,122,100);
 font-weight:normal;
 	text-align:right;
-	width:90px;
+	width:150px;
 
 }
 
@@ -113,6 +113,7 @@ font-weight:normal;
 .idearow
 {
 	height:20px;
+	background-color:rgb(251,245,147);
 
 }
 
@@ -241,6 +242,27 @@ text-align:center;
 
 	color:white;
 }
+
+.red
+{
+
+background-color:OrangeRed;
+}
+
+.orange
+{
+
+background-color:orange;
+
+}
+
+
+
+.red td a, .red td
+{
+color:LightGray  !important;
+}
+
 
 
 /*#refreshimg
