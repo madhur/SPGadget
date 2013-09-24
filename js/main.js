@@ -11,6 +11,8 @@ $().SPServices.defaults.listName = excelList;  // Name of the list for list
 // Enable support of cross domain origin request
 jQuery.support.cors = true;
 var truncatelength=30;
+var redDays=1;
+var orangeDays=30;
 
 // Disable caching of AJAX responses - Stop IE reusing cache data for the same requests
 $.ajaxSetup({
@@ -96,8 +98,8 @@ function  getEXCELData()
 {
 
 var functionStatus;
-//	var myQuery = "<Query><Where><And><Or><Or><Eq><FieldRef Name='Project_x0020_Contact' /><Value Type='Integer'><UserID/></Value></Eq><Eq><FieldRef Name='Project_x0020_Director' /><Value Type='Integer'><UserID/></Value></Eq></Or><Eq><FieldRef Name='Project_x0020_VP' /><Value Type='Integer'><UserID/></Value></Eq></Or><Neq><FieldRef Name='Project_x0020_Status' /><Value Type='Text'>Canceled</Value></Neq></And></Where></Query>";
-	var myQuery = "<Query><Where><And><Or><Or><Eq><FieldRef Name='Project_x0020_Contact' /><Value Type='Integer'><UserID/></Value></Eq><Eq><FieldRef Name='Project_x0020_Director' /><Value Type='Integer'><UserID/></Value></Eq></Or><Eq><FieldRef Name='Project_x0020_VP' /><Value Type='Text'>Shuchi S Dikshit</Value></Eq></Or><Neq><FieldRef Name='Project_x0020_Status' /><Value Type='Text'>Canceled</Value></Neq></And></Where></Query>";
+	var myQuery = "<Query><Where><And><Or><Or><Eq><FieldRef Name='Project_x0020_Contact' /><Value Type='Integer'><UserID/></Value></Eq><Eq><FieldRef Name='Project_x0020_Director' /><Value Type='Integer'><UserID/></Value></Eq></Or><Eq><FieldRef Name='Project_x0020_VP' /><Value Type='Integer'><UserID/></Value></Eq></Or><Neq><FieldRef Name='Project_x0020_Status' /><Value Type='Text'>Canceled</Value></Neq></And></Where></Query>";
+//	var myQuery = "<Query><Where><And><Or><Or><Eq><FieldRef Name='Project_x0020_Contact' /><Value Type='Integer'><UserID/></Value></Eq><Eq><FieldRef Name='Project_x0020_Director' /><Value Type='Integer'><UserID/></Value></Eq></Or><Eq><FieldRef Name='Project_x0020_VP' /><Value Type='Text'>Shuchi S Dikshit</Value></Eq></Or><Neq><FieldRef Name='Project_x0020_Status' /><Value Type='Text'>Canceled</Value></Neq></And></Where></Query>";
 	 
 	
 
@@ -193,7 +195,7 @@ includeAllAttrs: true
 							$('#' + excel.ID).addClass("red");
 							
 						}
-						else if(Date.today().add(30).days().isAfter(ideaDate))
+						else if(Date.today().add(orangeDays).days().isAfter(ideaDate))
 						{
 						
 							color="orange";
@@ -256,7 +258,11 @@ function showFlyout(status)
 
 		System.Gadget.Flyout.file = "flyout.html";
 		System.Gadget.Flyout.onShow = FlyoutLoaded;
+		//System.Gadget.Flyout.show =false;
+		//System.Gadget.Flyout.show =true;
+		//FlyoutLoaded();
 		System.Gadget.Flyout.show =!System.Gadget.Flyout.show;
+		
 	}
 
 }
@@ -280,9 +286,26 @@ function FlyoutLoaded()
 		 var size=$(flyoutDOM).find('tr').size()
 		$(heading).html(size +' ideas in '+ActiveCategory.valueOf() );
 		
+		var legend=System.Gadget.Flyout.document.getElementById('legend');
 		
 		var body=System.Gadget.Flyout.document.body;
 		var height=40+size*25;
+		if(height > window.screen.availHeight)
+			height=window.screen.availHeight;
+			
+			
+		if(ActiveCategory.valueOf()=="In Progress")
+		{
+			
+			$(legend).css("display","block");
+			height=height+43;
+			
+		}
+		else
+		{
+			$(legend).css("display","none");
+		}
+		
 		
 		setBodyHeight(body, height);
 		//System.Gadget.Flyout.document.body.style.height=600;
@@ -347,6 +370,8 @@ function setBodyHeight(body, height)
 	
   });
   
+  
+  $(body).css("overflow","auto");
 
 }
 
