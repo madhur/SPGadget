@@ -33,10 +33,10 @@ $(document).ready(function ()
 		return false;
 	});
 	
-	
-	
-	$('#star').raty();
-
+	//$('#star').raty();
+	$('#accordion').sortable({ items: 'tbody.category' });
+	//$('#accordion').disableSelection();
+	//$('#accordion tbody.category').draggable();
 
 });
 
@@ -81,10 +81,6 @@ function refresh()
 function init() 
 {
 	// Enable Settings dialog for the gadget. 
-	// System.Gadget.settingsUI = "cpsettings.html";
-
-	// Specify the Flyout root.
-	
 	var IsGadget = (window.System != undefined);
 	if(IsGadget)
 	{
@@ -99,10 +95,7 @@ function  getEXCELData()
 
 var functionStatus;
 	var myQuery = "<Query><Where><And><Or><Or><Eq><FieldRef Name='Project_x0020_Contact' /><Value Type='Integer'><UserID/></Value></Eq><Eq><FieldRef Name='Project_x0020_Director' /><Value Type='Integer'><UserID/></Value></Eq></Or><Eq><FieldRef Name='Project_x0020_VP' /><Value Type='Integer'><UserID/></Value></Eq></Or><Neq><FieldRef Name='Project_x0020_Status' /><Value Type='Text'>Canceled</Value></Neq></And></Where></Query>";
-//	var myQuery = "<Query><Where><And><Or><Or><Eq><FieldRef Name='Project_x0020_Contact' /><Value Type='Integer'><UserID/></Value></Eq><Eq><FieldRef Name='Project_x0020_Director' /><Value Type='Integer'><UserID/></Value></Eq></Or><Eq><FieldRef Name='Project_x0020_VP' /><Value Type='Text'>Shuchi S Dikshit</Value></Eq></Or><Neq><FieldRef Name='Project_x0020_Status' /><Value Type='Text'>Canceled</Value></Neq></And></Where></Query>";
-	 
-	
-
+	//var myQuery = "<Query><Where><And><Or><Or><Eq><FieldRef Name='Project_x0020_Contact' /><Value Type='Integer'><UserID/></Value></Eq><Eq><FieldRef Name='Project_x0020_Director' /><Value Type='Integer'><UserID/></Value></Eq></Or><Eq><FieldRef Name='Project_x0020_VP' /><Value Type='Text'>Shuchi S Dikshit</Value></Eq></Or><Neq><FieldRef Name='Project_x0020_Status' /><Value Type='Text'>Canceled</Value></Neq></And></Where></Query>";
 	
 	$().SPServices(
 	{
@@ -122,7 +115,6 @@ completefunc: function (xData, Status)
 			{
 				functionStatus="success";
 			}
-			// alert(Status);
 			var resJson=$(xData.responseXML).SPFilterNode("z:row").SPXmlToJson(
 			{ 
 				
@@ -140,11 +132,8 @@ includeAllAttrs: true
 			var sum=0;
 			$.each(resJson, function(i,excel) 
 			{
-				//insert the departments
 				if (excel.Project_x0020_Status != null && $('#' + excel.Project_x0020_Status.replace(/ /g,"_")).length == 0) 
 				{
-					// console.log(excel.Project_x0020_Status);
-					
 					$('#accordion').append('<tbody id='+ excel.Project_x0020_Status.replace(/ /g,"_")+' class="category"><tr class="contentrow"><td class="arrow">> </td><td onclick="javascript:showFlyout('+excel.Project_x0020_Status.replace(/ /g,"_")+'sub)" class="content">'+excel.Project_x0020_Status+'</td><td class="amount" id="amnt"></td></tr></tbody><tbody class="subcategory" id='+excel.Project_x0020_Status.replace(/ /g,"_")+'sub></tbody>');
 					
 					statuslist.push(excel.Project_x0020_Status.replace(/ /g,"_"));
@@ -152,7 +141,6 @@ includeAllAttrs: true
 					
 				}
 				//insert contacts in the accordion
-				// $('#' + excel.Project_x0020_Status.replace(/ /g,"_")).after('<table style="width:100%"><tr><td class="title"><a href="https://teams.aexp.com/sites/teamsitewendy/WASTE/Lists/WASTE%20Ideas/dispform.aspx?ID=' + excel.ID + '">' + excel.Title + '</a></td><td class="amount">$ '+ getMoney(excel.Estimated_x0020_Savings)   +'</td></tr></table>');
 				$('#' + excel.Project_x0020_Status.replace(/ /g,"_") +'sub').append('<tr id=' + excel.ID + ' class="idearow"><td class="idea" colspan="2"><a href="https://teams.aexp.com/sites/teamsitewendy/WASTE/Lists/WASTE%20Ideas/dispform.aspx?ID='+ excel.ID+'">'+excel.Title.truncateOnWord(truncatelength)+'</a></td><td class="ideaamount">$ '+getMoney(excel.Estimated_x0020_Savings)+'</td></tr>');
 				
 				var previousSum=$('#' + excel.Project_x0020_Status.replace(/ /g,"_")).attr("sum");
@@ -202,9 +190,6 @@ includeAllAttrs: true
 							$('#' +  excel.ID).addClass("orange");
 						}
 						
-						
-						
-						
 				}
 				
 				
@@ -216,11 +201,8 @@ includeAllAttrs: true
 				var sum=$("#" + list).attr("sum");
 				
 				sum= "$ "+ getMoney(sum);
-				// $("#" + list).after("<span style='float:right'>"+sum+"</span>");
 				
 				$("#" + list).find('#amnt').html(sum);									
-				
-				
 				
 			});
 			
@@ -232,10 +214,6 @@ includeAllAttrs: true
 	{
 		var body=document.body;
 		var height=100+ $('tbody.category').size()*40;
-		
-		
-		// document.body.style.height=100 + $('tbody.category').size()*40;
-		
 		setBodyHeight(body,height);
 	});
 	
@@ -258,9 +236,6 @@ function showFlyout(status)
 
 		System.Gadget.Flyout.file = "flyout.html";
 		System.Gadget.Flyout.onShow = FlyoutLoaded;
-		//System.Gadget.Flyout.show =false;
-		//System.Gadget.Flyout.show =true;
-		//FlyoutLoaded();
 		System.Gadget.Flyout.show =!System.Gadget.Flyout.show;
 		
 	}
@@ -275,16 +250,10 @@ function FlyoutLoaded()
 	var flyoutDOM=System.Gadget.Flyout.document.getElementById('faccordion');
 	$(flyoutDOM).empty();
 	$(flyoutDOM).append(approvedDOM);
-
-
-	
-		
-		//$(flyoutDOM).append($('#'+ ActiveFlyout).children().size());
 		
 		var heading=System.Gadget.Flyout.document.getElementById('heading');
-		//$(heading).html('<h1>5</h1>');
-		 var size=$(flyoutDOM).find('tr').size()
-		$(heading).html(size +' ideas in '+ActiveCategory.valueOf() );
+     	 var size=$(flyoutDOM).find('tr').size()
+		$(heading).html(size +' ideas in '+ '"'+ActiveCategory.valueOf()+'"' );
 		
 		var legend=System.Gadget.Flyout.document.getElementById('legend');
 		
@@ -308,7 +277,6 @@ function FlyoutLoaded()
 		
 		
 		setBodyHeight(body, height);
-		//System.Gadget.Flyout.document.body.style.height=600;
 
 }
 
@@ -343,16 +311,6 @@ function ResizeWindowTo(sElemId) {
 	document.body.style.width = nWide;
 }
 
-
-function resize(height, width)
-{
-
-	//document.body.style.height=400;
-
-
-}
-
-
 function rateit()
 {
 	//var body=document.body;
@@ -365,7 +323,7 @@ function setBodyHeight(body, height)
 {
 	
 
-  $(body).animate( {height:height},1000, function() {
+  $(body).animate( {height:height},125, function() {
     // Animation complete.
 	
   });

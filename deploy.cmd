@@ -22,7 +22,7 @@ cd c:\Users\mahuj4\desktop\ExcelGadget
 
 c:\7-ZipPortable\App\7-Zip64\7z.exe a -r -xr!*.cmd ExcelGadgetv1.zip *.*
 
-rename ExcelGadgetv1.zip ExcelGadgetv1.gadget
+
 
 PAUSE
 

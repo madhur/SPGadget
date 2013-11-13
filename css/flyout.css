@@ -7,7 +7,7 @@ width:400px;
 padding:0px 0px 0px 0px;
 margin:0px 0px 0px 0px;
 overflow:auto;	
-background-color:color:rgb(167,87,54);
+	background-color:rgb(242, 242, 242);
 
 }
 
@@ -39,7 +39,7 @@ height:500px;
 
 .content
 {
-	color:rgb(167,87,54);
+	color:rgb(82,141,212);
 	font-weight:bold;
 	padding-left:5px;
 	cursor:pointer;
@@ -60,7 +60,7 @@ width:15px;
 
 .content a
 {
-	color:rgb(167,87,54);
+	color:rgb(82,141,212);
 	font-weight:bold;
 	text-decoration:none;
 }
@@ -114,7 +114,7 @@ font-weight:normal;
 .idearow
 {
 	height:20px;
-	background-color:rgb(251,245,147);
+	background-color:rgb(242, 242, 242);
 
 }
 
@@ -127,7 +127,7 @@ font-size:14px;
 .toprow
 {
 
-background-color:#543930;
+background-color:rgb(82,141,212);
 height:40px;
 }
 
@@ -179,12 +179,12 @@ cursor:pointer;
 .bottomtable
 {
 height:40px;
-background-color:#543930;
+background-color:rgb(82,141,212);
 
 }
 .bottomrow
 {
-	background-color:#543930;
+	background-color:rgb(82,141,212);
 	/*color:rgb(167,87,54);*/
 	color:white;
 	
@@ -271,7 +271,7 @@ color:LightGray  !important;
 
 .legend-scale
 {
-background-color:#543930;
+background-color:rgb(82,141,212);
 width:100%;
 
 
