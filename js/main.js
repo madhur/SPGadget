@@ -141,7 +141,7 @@ function getEXCELData()
 		operation : "GetListItems",
 		async : false,
 		listName : excelList,
-		CAMLViewFields : "<ViewFields Properties='True'><FieldRef Name='Title' /><FieldRef Name='Project_x0020_Status' /><FieldRef Name='Project_x0020_Director' /><FieldRef Name='Project_x0020_Contact' /><FieldRef Name='Project_x0020_VP' /><FieldRef Name='Estimated_x0020_Savings' /><FieldRef Name='Planned_x0020_Implementation_x00' /><FieldRef Name='Revised_x0020_Implementation_x00' /></ViewFields>",
+		CAMLViewFields : "<ViewFields Properties='True'><FieldRef Name='Title' /><FieldRef Name='Project_x0020_Status' /><FieldRef Name='Project_x0020_Director' /><FieldRef Name='Project_x0020_Contact' /><FieldRef Name='Project_x0020_VP' /><FieldRef Name='Estimated_x0020_Savings' /><FieldRef Name='EstimatedSavings2012' /><FieldRef Name='EstimatedSavings2013' /><FieldRef Name='EstimatedSavings2014' /><FieldRef Name='EstimatedSavings2015' /><FieldRef Name='Planned_x0020_Implementation_x00' /><FieldRef Name='Revised_x0020_Implementation_x00' /></ViewFields>",
 		CAMLQuery : myQuery,
 		completefunc : function (xData, Status)
 		{
@@ -181,6 +181,8 @@ function getEXCELData()
 
 			var statuslist = new Array();
 			var sum = 0;
+
+			$('#accordion').empty();
 			$.each(resJson, function (i, excel)
 			{
 				if (excel.Project_x0020_Status != null && $('#' + excel.Project_x0020_Status.replace(/ /g, "_")).length == 0)
@@ -191,13 +193,13 @@ function getEXCELData()
 
 				}
 				//insert contacts in the accordion
-				$('#' + excel.Project_x0020_Status.replace(/ /g, "_") + 'sub').append('<tr id=' + excel.ID + ' class="idearow"><td class="idea" colspan="2"><a href="https://teams.aexp.com/sites/teamsitewendy/WASTE/Lists/WASTE%20Ideas/dispform.aspx?ID=' + excel.ID + '">' + excel.Title.truncateOnWord(truncatelength) + '</a></td><td class="ideaamount">$ ' + getMoney(excel.Estimated_x0020_Savings) + '</td></tr>');
+				$('#' + excel.Project_x0020_Status.replace(/ /g, "_") + 'sub').append('<tr id=' + excel.ID + ' class="idearow"><td class="idea" colspan="2"><a href="https://teams.aexp.com/sites/teamsitewendy/WASTE/Lists/WASTE%20Ideas/dispform.aspx?ID=' + excel.ID + '">' + excel.Title.truncateOnWord(truncatelength) + '</a></td><td class="ideaamount">$ ' + getMoney(getIdeaAmount(excel)) + '</td></tr>');
 
 				var previousSum = $('#' + excel.Project_x0020_Status.replace(/ /g, "_")).attr("sum");
 				if (typeof(previousSum) == "undefined")
 					previousSum = 0;
 
-				previousSum = Number(previousSum) + Number(excel.Estimated_x0020_Savings);
+				previousSum = Number(previousSum) + Number(getIdeaAmount(excel));
 				$('#' + excel.Project_x0020_Status.replace(/ /g, "_")).attr("sum", previousSum);
 
 				//Calculate heat map based on date
@@ -281,8 +283,7 @@ function showFlyout(status)
 	if (index != -1)
 		ActiveCategory = status.id.substring(0, index).replace(/_/g, " ");
 
-	var IsGadget = (window.System != undefined);
-	if (IsGadget)
+	if (IsGadget())
 	{
 
 		System.Gadget.Flyout.file = "flyout.html";
@@ -290,24 +291,41 @@ function showFlyout(status)
 		System.Gadget.Flyout.show = !System.Gadget.Flyout.show;
 
 	}
+	else
+	{
+		var myWin=window.open('flyout.html','1384802697002','width=400,height=140,toolbar=0,menubar=0,location=0,status=0,scrollbars=0,resizable=1,left=0,top=0');
+		FlyoutLoaded(myWin);
+	}
 
 }
 
-function FlyoutLoaded()
+function FlyoutLoaded(myWin)
 {
 
 	var approvedDOM = $(ActiveFlyout).html();
-	var flyoutDOM = System.Gadget.Flyout.document.getElementById('faccordion');
+	var flyoutDOM;
+	var docDOM;
+	if(IsGadget())	
+	{
+		flyoutDOM = System.Gadget.Flyout.document.getElementById('faccordion');
+		docDOM=System.Gadget.Flyout.document;
+	}
+	else
+	{
+	flyoutDOM=myWin.document.getElementById('faccordion');
+	docDOM=myWin.document;
+	}
+	
 	$(flyoutDOM).empty();
 	$(flyoutDOM).append(approvedDOM);
 
-	var heading = System.Gadget.Flyout.document.getElementById('heading');
-	var size = $(flyoutDOM).find('tr').size()
-		$(heading).html(size + ' ideas in ' + '"' + ActiveCategory.valueOf() + '"');
+	var heading = docDOM.getElementById('heading');
+	var size = $(flyoutDOM).find('tr').size();
+	$(heading).html(size + ' ideas in ' + '"' + ActiveCategory.valueOf() + '"');
 
-	var legend = System.Gadget.Flyout.document.getElementById('legend');
+	var legend = docDOM.getElementById('legend');
 
-	var body = System.Gadget.Flyout.document.body;
+	var body = docDOM.body;
 	var height = 40 + size * 25;
 	if (height > window.screen.availHeight)
 		height = window.screen.availHeight;
@@ -388,14 +406,47 @@ function setBodyHeight(body, height)
 
 function getYearFilter()
 {
-	var selVal = System.Gadget.Settings.readString("viewoption");
+	if (IsGadget())
+	{
+		var selVal = System.Gadget.Settings.readString("viewoption");
 
-	return selVal;
+		if (selVal == "")
+			selVal == "nofilter"
+
+			return selVal;
+	}
+
+	return "";
+
+}
+
+function getMyIdeaFilter()
+{
+
+	if (IsGadget())
+	{
+		var selVal = System.Gadget.Settings.readString("onlymyideas");
+		if (selVal == "")
+			selVal = "false";
+
+		return selVal;
+	}
+	
+	return "false";
+
+}
+
+function IsGadget()
+{
+	var IsGadgetrun = (window.System != undefined);
+	return IsGadgetrun;
 
 }
 
 function getIdeaAmount(excel)
 {
+	var filterSetting = getYearFilter();
+
 	if (filterSetting == "nofilter" || filterSetting == "")
 	{
 		return excel.Estimated_x0020_Savings;
@@ -410,13 +461,11 @@ function getIdeaAmount(excel)
 
 		return excel.EstimatedSavings2014;
 	}
-	
 	else if (filterSetting == "previousyear")
 	{
 
 		return excel.EstimatedSavings2012;
 	}
-
 
 }
 
@@ -426,19 +475,55 @@ function getQuery()
 	var myQuery;
 
 	var filterSetting = getYearFilter();
+	var myideafilterSetting = getMyIdeaFilter();
 
-	if (filterSetting == "nofilter" || filterSetting == "")
-		myQuery = "<Query><Where><And><Or><Or><Eq><FieldRef Name='Project_x0020_Contact' /><Value Type='Integer'><UserID/></Value></Eq><Eq><FieldRef Name='Project_x0020_Director' /><Value Type='Integer'><UserID/></Value></Eq></Or><Or><Eq><FieldRef Name='Project_x0020_VP' /><Value Type='Integer'><UserID/></Value></Eq><Eq><FieldRef Name='FTE_x0020_Contributors' /><Value Type='Integer'><UserID/></Value></Eq></Or></Or><Neq><FieldRef Name='Project_x0020_Status' /><Value Type='Text'>Canceled</Value></Neq></And></Where></Query>";
-	else if (filterSetting == "currentyear")
+	if (myideafilterSetting == "false")
 	{
 
-		myQuery = "<Query><Where><And><And><Or><Or><Eq><FieldRef Name='Project_x0020_Contact' /><Value Type='Integer'><UserID/></Value></Eq><Eq><FieldRef Name='Project_x0020_Director' /><Value Type='Integer'><UserID/></Value></Eq></Or><Or><Eq><FieldRef Name='Project_x0020_VP' /><Value Type='Integer'><UserID/></Value></Eq><Eq><FieldRef Name='FTE_x0020_Contributors' /><Value Type='Integer'><UserID/></Value></Eq></Or></Or><Neq><FieldRef Name='Project_x0020_Status' /><Value Type='Text'>Canceled</Value></Neq></And><Neq><FieldRef Name='EstimatedSavings2013' /><Value Type='Integer'>0</Value></Neq> </And></Where></Query>";
+		if (filterSetting == "nofilter" || filterSetting == "")
+			myQuery = "<Query><Where><And><Or><Or><Eq><FieldRef Name='Project_x0020_Contact' /><Value Type='Integer'><UserID/></Value></Eq><Eq><FieldRef Name='Project_x0020_Director' /><Value Type='Integer'><UserID/></Value></Eq></Or><Or><Eq><FieldRef Name='Project_x0020_VP' /><Value Type='Integer'><UserID/></Value></Eq><Eq><FieldRef Name='FTE_x0020_Contributors' /><Value Type='Integer'><UserID/></Value></Eq></Or></Or><Neq><FieldRef Name='Project_x0020_Status' /><Value Type='Text'>Canceled</Value></Neq></And></Where></Query>";
+		else if (filterSetting == "currentyear")
+		{
 
+			myQuery = "<Query><Where><And><And><Or><Or><Eq><FieldRef Name='Project_x0020_Contact' /><Value Type='Integer'><UserID/></Value></Eq><Eq><FieldRef Name='Project_x0020_Director' /><Value Type='Integer'><UserID/></Value></Eq></Or><Or><Eq><FieldRef Name='Project_x0020_VP' /><Value Type='Integer'><UserID/></Value></Eq><Eq><FieldRef Name='FTE_x0020_Contributors' /><Value Type='Integer'><UserID/></Value></Eq></Or></Or><Neq><FieldRef Name='Project_x0020_Status' /><Value Type='Text'>Canceled</Value></Neq></And><Neq><FieldRef Name='EstimatedSavings2013' /><Value Type='Integer'>0</Value></Neq> </And></Where></Query>";
+
+		}
+		else if (filterSetting == "nextyear")
+		{
+
+			myQuery = "<Query><Where><And><And><Or><Or><Eq><FieldRef Name='Project_x0020_Contact' /><Value Type='Integer'><UserID/></Value></Eq><Eq><FieldRef Name='Project_x0020_Director' /><Value Type='Integer'><UserID/></Value></Eq></Or><Or><Eq><FieldRef Name='Project_x0020_VP' /><Value Type='Integer'><UserID/></Value></Eq><Eq><FieldRef Name='FTE_x0020_Contributors' /><Value Type='Integer'><UserID/></Value></Eq></Or></Or><Neq><FieldRef Name='Project_x0020_Status' /><Value Type='Text'>Canceled</Value></Neq></And><Neq><FieldRef Name='EstimatedSavings2014' /><Value Type='Integer'>0</Value></Neq></And></Where></Query>";
+
+		}
+		else if (filterSetting == "previousyear")
+		{
+
+			myQuery = "<Query><Where><And><And><Or><Or><Eq><FieldRef Name='Project_x0020_Contact' /><Value Type='Integer'><UserID/></Value></Eq><Eq><FieldRef Name='Project_x0020_Director' /><Value Type='Integer'><UserID/></Value></Eq></Or><Or><Eq><FieldRef Name='Project_x0020_VP' /><Value Type='Integer'><UserID/></Value></Eq><Eq><FieldRef Name='FTE_x0020_Contributors' /><Value Type='Integer'><UserID/></Value></Eq></Or></Or><Neq><FieldRef Name='Project_x0020_Status' /><Value Type='Text'>Canceled</Value></Neq></And><Neq><FieldRef Name='EstimatedSavings2012' /><Value Type='Integer'>0</Value></Neq></And></Where></Query>";
+
+		}
 	}
-	else if (filterSetting == "nextyear")
+	else if (myideafilterSetting == "true")
 	{
 
-		myQuery = "<Query><Where><And><And><Or><Or><Eq><FieldRef Name='Project_x0020_Contact' /><Value Type='Integer'><UserID/></Value></Eq><Eq><FieldRef Name='Project_x0020_Director' /><Value Type='Integer'><UserID/></Value></Eq></Or><Or><Eq><FieldRef Name='Project_x0020_VP' /><Value Type='Integer'><UserID/></Value></Eq><Eq><FieldRef Name='FTE_x0020_Contributors' /><Value Type='Integer'><UserID/></Value></Eq></Or></Or><Neq><FieldRef Name='Project_x0020_Status' /><Value Type='Text'>Canceled</Value></Neq></And><Neq><FieldRef Name='EstimatedSavings2014' /><Value Type='Integer'>0</Value></Neq></And></Where></Query>";
+		if (filterSetting == "nofilter" || filterSetting == "")
+			myQuery = "<Query><Where><And><Or><Eq><FieldRef Name='Project_x0020_Contact' /><Value Type='Integer'><UserID/></Value></Eq><Eq><FieldRef Name='FTE_x0020_Contributors' /><Value Type='Integer'><UserID/></Value></Eq></Or><Neq><FieldRef Name='Project_x0020_Status' /><Value Type='Text'>Canceled</Value></Neq></And></Where></Query>";
+		else if (filterSetting == "currentyear")
+		{
+
+			myQuery = "<Query><Where><And><And><Or><Eq><FieldRef Name='Project_x0020_Contact' /><Value Type='Integer'><UserID/></Value></Eq><Eq><FieldRef Name='FTE_x0020_Contributors' /><Value Type='Integer'><UserID/></Value></Eq></Or><Neq><FieldRef Name='Project_x0020_Status' /><Value Type='Text'>Canceled</Value></Neq></And><Neq><FieldRef Name='EstimatedSavings2013' /><Value Type='Integer'>0</Value></Neq> </And></Where></Query>";
+
+		}
+		else if (filterSetting == "nextyear")
+		{
+
+			myQuery = "<Query><Where><And><And><Or><Eq><FieldRef Name='Project_x0020_Contact' /><Value Type='Integer'><UserID/></Value></Eq><Eq><FieldRef Name='FTE_x0020_Contributors' /><Value Type='Integer'><UserID/></Value></Eq></Or><Neq><FieldRef Name='Project_x0020_Status' /><Value Type='Text'>Canceled</Value></Neq></And><Neq><FieldRef Name='EstimatedSavings2014' /><Value Type='Integer'>0</Value></Neq> </And></Where></Query>";
+
+		}
+		else if (filterSetting == "previousyear")
+		{
+
+			myQuery = "<Query><Where><And><And><Or><Eq><FieldRef Name='Project_x0020_Contact' /><Value Type='Integer'><UserID/></Value></Eq><Eq><FieldRef Name='FTE_x0020_Contributors' /><Value Type='Integer'><UserID/></Value></Eq></Or><Neq><FieldRef Name='Project_x0020_Status' /><Value Type='Text'>Canceled</Value></Neq></And><Neq><FieldRef Name='EstimatedSavings2012' /><Value Type='Integer'>0</Value></Neq> </And></Where></Query>";
+
+		}
 
 	}
 

@@ -6,3 +6,17 @@ height: 200px;
 font-family:Arial;
 font-size:12px;
 }
+
+td{
+font-size:12px;
+}
+
+fieldset
+{
+
+width:280px;
+}
+
+ tr    { border-collapse: separate; }
+   
+    td { border-spacing: 10px; }
