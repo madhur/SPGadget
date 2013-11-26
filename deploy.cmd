@@ -7,9 +7,10 @@ cd ..
 del *.css
 del *.js
 
-java -jar yuicompressor-2.4.8.jar Excel.Gadget\js\main.js -o main.js
-java -jar yuicompressor-2.4.8.jar Excel.Gadget\css\theme.css -o theme.css
-java -jar yuicompressor-2.4.8.jar Excel.Gadget\css\flyout.css -o flyout.css
+java -jar yuicompressor-2.4.8.jar SPGadget.gadget\js\main.js -o main.js
+java -jar yuicompressor-2.4.8.jar SPGadget.gadget\css\excel.css -o excel.css
+java -jar yuicompressor-2.4.8.jar SPGadget.gadget\css\flyout.css -o flyout.css
+java -jar yuicompressor-2.4.8.jar SPGadget.gadget\css\settings.css -o settings.css
 
 copy /y *.css c:\Users\mahuj4\desktop\ExcelGadget\css\
 copy /y *.js c:\Users\mahuj4\desktop\ExcelGadget\js\
@@ -28,4 +29,4 @@ PAUSE
 
 echo "Deploy Completed"
 
-cd C:\Users\mahuj4\AppData\Local\Microsoft\Windows Sidebar\Gadgets\EXCEL.gadget
+cd C:\Users\mahuj4\AppData\Local\Microsoft\Windows Sidebar\Gadgets\SPGadget.gadget

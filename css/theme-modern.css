@@ -1,4 +1,7 @@
-
+body
+{
+background-color:rgb(242, 242, 242);
+}
 
 .content
 {
@@ -13,13 +16,11 @@ color:rgb(117,122,100);
 .amount
 {
 color:rgb(117,122,100);
-
 }
 
 .ideaamount
 {
 color:rgb(117,122,100);
-
 }
 
 .contentrow
@@ -28,7 +29,7 @@ color:rgb(117,122,100);
 }
 
 
-table.toprow, .toprow1
+.toprow
 {
 
 background-color:rgb(82,141,212);

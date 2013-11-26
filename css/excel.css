@@ -2,15 +2,13 @@ body
 {
 	font-weight:bold;
 	font-family:Arial;
-	height:140px;
-width:400px;
+	height:100px;
+width:300px;
 padding:0px 0px 0px 0px;
 margin:0px 0px 0px 0px;
-overflow:auto;	
-	  background-color:rgb(242, 242, 242);
+
 
 }
-
 a,img
 {
 border-style:none;
@@ -32,14 +30,11 @@ width:100%;
 }
 
 
-.category
-{
-height:500px;
-}
+
 
 .content
 {
-	color:rgb(82,141,212);
+	
 	font-weight:bold;
 	padding-left:5px;
 	cursor:pointer;
@@ -60,7 +55,7 @@ width:15px;
 
 .content a
 {
-	color:rgb(82,141,212);
+	color:black;
 	font-weight:bold;
 	text-decoration:none;
 }
@@ -68,6 +63,7 @@ width:15px;
 
 .idea a
 {
+	
 	font-weight:bold;
 	text-decoration:none;
 	font-size:12px;
@@ -75,9 +71,7 @@ width:15px;
 
 .idea
 {
-	padding-left:10px;
-	padding-top: 5px;
-	padding-bottom: 5px;
+	margin-left:10px;
 	
 }
 
@@ -85,9 +79,10 @@ width:15px;
 {
 
 padding-right:10px;
+
 font-weight:normal;
 	text-align:right;
-	width:150px;
+	width:110px;
 
 }
 
@@ -95,10 +90,10 @@ font-weight:normal;
 {
 
 padding-right:10px;
+
 font-weight:normal;
 	text-align:right;
 	width:90px;
-	border-right:1pt solid rgb(195,195,121);
 
 }
 
@@ -120,7 +115,7 @@ border-bottom:1pt solid rgb(195,195,121);
 font-size:14px;
 }
 
-.toprow1
+.toprow
 {
 
 height:40px;
@@ -172,6 +167,7 @@ cursor:pointer;
 .bottomtable
 {
 height:40px;
+
 
 }
 .bottomrow
@@ -227,76 +223,51 @@ text-align:center;
 
 .subcategory
 {
-	display:block;
+	display:none;
 }
-#heading
+
+.bottomrow img
 {
 
-	color:white;
+	height:24px;
+	width:24px;
+
 }
 
-.red
+#star
 {
+background-color:#543930;
 
-background-color:OrangeRed;
 }
 
-.orange
+#rating
 {
-
-background-color:orange;
+background-color:#543930;
+height:40px;
 
 }
-
-.bottomrow
+.ratetext
 {
-
-
-
+font-size:10px;
+width:25%;
+float:left;
+color:white;
 }
 
-.red td a, .red td
+.rateicon
 {
-color:LightGray  !important;
+width:50%;
+font-size:10px;
+text-align:center;
 }
 
-.legend-scale
+.ratetip
 {
-background-color:rgb(82,141,212);
-width:100%;
-
-
-}
-#legend
-{
-
-display:none;
-
+width:25%;
+font-size:10px;
+float:right;
 }
 
- .legend-scale ul {
-    /*margin-bottom: 5px;*/
-    float: left;
-	margin-left:0px;
-	padding-top:5px;
-    list-style: none;
-    }
-  .legend-scale ul li {
-    font-size: 10px;
-	color:white;
-	
-	padding-left:10px;
-	padding-bottom:5px;
-    list-style: none;
-    /*margin-bottom: 2px;*/
-    }
- ul.legend-labels li span {
-    display: block;
-    float: left;
-    height: 8px;
-    width: 30px;
-    border: 1px solid #999;
-    }
 
 /*#refreshimg
 {
