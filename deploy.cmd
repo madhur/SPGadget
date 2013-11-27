@@ -8,9 +8,12 @@ del *.css
 del *.js
 
 java -jar yuicompressor-2.4.8.jar SPGadget.gadget\js\main.js -o main.js
+java -jar yuicompressor-2.4.8.jar SPGadget.gadget\js\flyout.js -o flyout.js
 java -jar yuicompressor-2.4.8.jar SPGadget.gadget\css\excel.css -o excel.css
 java -jar yuicompressor-2.4.8.jar SPGadget.gadget\css\flyout.css -o flyout.css
 java -jar yuicompressor-2.4.8.jar SPGadget.gadget\css\settings.css -o settings.css
+java -jar yuicompressor-2.4.8.jar SPGadget.gadget\css\theme.css -o theme.css
+java -jar yuicompressor-2.4.8.jar SPGadget.gadget\css\theme-modern.css -o theme-modern.css
 
 copy /y *.css c:\Users\mahuj4\desktop\ExcelGadget\css\
 copy /y *.js c:\Users\mahuj4\desktop\ExcelGadget\js\
