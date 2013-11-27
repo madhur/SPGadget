@@ -5,13 +5,17 @@
         <version>1.0.0.0</version>
         <author name="Madhur Ahuja">
                 <info url="https://mysites.aexp.com/Person.aspx?accountname=ads%5Cmahuj4" />
-               
+                <logo src="logo.jpg" />
         </author>
         <copyright>American Express</copyright>
         <description>EXCEL Gadget</description>-->
         <!--<icons>
                 <icon height="48" width="48" src="icon.png" />
         </icons>-->
+		
+		 <icons>
+			<icon height="48" width="48" src="logo.jpg" />
+		</icons>
         <hosts>
                 <host name="sidebar">
 
