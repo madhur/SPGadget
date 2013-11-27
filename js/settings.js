@@ -13,7 +13,10 @@ function initLoad()
 			$("#onlymyideas").prop('checked', true);
 		else if (storedVal == "false")
 			$("#onlymyideas").prop('checked', false);
-
+			
+		storedVal=System.Gadget.Settings.readString("theme");
+		if (storedVal != "")
+			$("#theme").val(System.Gadget.Settings.readString("theme"));
 	}
 }
 
@@ -37,10 +40,14 @@ function SettingsClosing(event)
 		if (event.closeAction == event.Action.commit)
 		{
 			System.Gadget.Settings.writeString("viewoption", $("#viewoption").val());
+			System.Gadget.Settings.writeString("theme", $("#theme").val());
+			
 			if ($("#onlymyideas").prop('checked'))
 				System.Gadget.Settings.writeString("onlymyideas", 'true');
 			else
 				System.Gadget.Settings.writeString("onlymyideas", 'false');
+				
+			
 			System.Gadget.document.parentWindow.settingsHaveChanged();
 		}
 

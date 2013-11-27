@@ -28,7 +28,7 @@ color:rgb(117,122,100);
 }
 
 
-table.toprow, .toprow1
+table.toprow, table.toprow1
 {
 
 background-color:rgb(82,141,212);
@@ -52,4 +52,18 @@ color:rgb(117,122,100);
 .bottomrow
 {
 	background-color:rgb(82,141,212);
+}
+
+.legend-scale
+{
+background-color:rgb(82,141,212);
+
+
+}
+
+.arrow
+{
+
+	color:rgb(117,122,100);
+
 }

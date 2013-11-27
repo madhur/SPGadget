@@ -1,56 +1,72 @@
 body
 {
-background-color:rgb(242, 242, 242);
+background-color:#009BBB;
 }
 
 .content
 {
-color:rgb(117,122,100);
+color:white;
 }
 
 .idea a
 {
-	color:rgb(117,122,100);
+	color:white;
 }
 
 .amount
 {
-color:rgb(117,122,100);
+color:white;
 }
 
 .ideaamount
 {
-color:rgb(117,122,100);
+color:white;
 }
 
 .contentrow
 {
-		background-color:rgb(242, 242, 242);
+		background-color:#009BBB;
 }
 
 
-.toprow
+table.toprow, table.toprow1
 {
 
-background-color:rgb(82,141,212);
+background-color:#002663;
 }
 
 .statusrow
 {
 
-background-color:rgb(242, 242, 242);
-color:rgb(117,122,100);
+background-color:#009BBB;
+color:white;
 
 }
 
 
 .idearow
 {
-	background-color:rgb(242, 242, 242);
+	background-color:#009BBB;
 
 }
 
 .bottomrow
 {
-	background-color:rgb(82,141,212);
+	background-color:#002663;
 }
+
+.legend-scale
+{
+background-color:#002663;
+
+
+}
+
+
+.arrow
+{
+
+	color:white;
+
+}
+

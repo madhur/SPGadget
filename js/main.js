@@ -52,7 +52,7 @@ function refresh()
 
 
 	YUI().use('get', function (Y) {
-	   Y.Get.css('css/theme.css', function (err) {
+	   Y.Get.css(getTheme(), function (err) {
 			if (err) {
 				Y.log('Error loading CSS: ' + err[0].error, 'error');
 				return;
@@ -479,6 +479,23 @@ function getIdeaAmount(excel)
 
 		return excel.EstimatedSavings2012;
 	}
+
+}
+
+function getTheme()
+{
+if (IsGadget())
+	{
+		var selVal = System.Gadget.Settings.readString("theme");
+		if (selVal == "" || selVal=="classic")
+			selVal = "css/theme.css";
+		else if (selVal=="modern")
+		selVal="css/theme-modern.css";
+		
+		return selVal;
+	}
+
+	return "css/theme-modern.css";
 
 }
 
