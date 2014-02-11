@@ -1,0 +1,39 @@
+{
+  "name": "ExcelGadget",
+  "title": "Excel Gadget",
+  "version": "1.0.0",
+  "devDependencies": {
+    "grunt": "0.4.1",
+    "grunt-contrib-cssmin": "0.6.1",
+    "grunt-contrib-watch": "0.5.3",
+    "grunt-contrib-uglify": "0.2.0",
+    "grunt-contrib-copy": "*",
+    "grunt-contrib-clean": "*",
+    "grunt-contrib-compress": "*",
+    "grunt-rename": "*"
+
+  },
+  "description": "This gadget pulls the data from a SharePoint list and displays nicely onto a desktop. The gadget utilzes following libraries",
+  "main": "gruntfile.js",
+  "dependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-copy": "~0.5.0",
+    "grunt-contrib-clean": "~0.5.0",
+    "grunt-contrib-uglify": "~0.2.0",
+    "grunt-contrib-cssmin": "~0.6.1",
+    "grunt-contrib-watch": "~0.5.3"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/madhur/SPGadget.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/madhur/SPGadget/issues"
+  },
+  "homepage": "https://github.com/madhur/SPGadget"
+}
