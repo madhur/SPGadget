@@ -9,23 +9,20 @@
         </author>
         <copyright>American Express</copyright>
         <description>EXCEL Gadget</description>-->
-        <!--<icons>
-                <icon height="48" width="48" src="icon.png" />
-        </icons>-->
-		
-		 <icons>
-			<icon height="48" width="48" src="logo.jpg" />
-		</icons>
-        <hosts>
-                <host name="sidebar">
+     
+	 <icons>
+		<icon height="70" width="70" src="logo.jpg" />
+	</icons>
+<hosts>
+        <host name="sidebar">
 
-                        <!-- New autoscaleDPI node -->
-                        <autoscaleDPI>true</autoscaleDPI>
+                <!-- New autoscaleDPI node -->
+                <autoscaleDPI>true</autoscaleDPI>
 
-                        <base type="HTML" apiVersion="1.0.0" src="excel.html" />
-                        <permissions>Full</permissions>
-                        <platform minPlatformVersion="1.0" />
-                        <defaultImage src="logo.jpg" />
-                </host>
-        </hosts>
+                <base type="HTML" apiVersion="1.0.0" src="excel.html" />
+                <permissions>Full</permissions>
+                <platform minPlatformVersion="1.0" />
+                <defaultImage src="logo.jpg" />
+        </host>
+</hosts>
 </gadget>
