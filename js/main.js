@@ -1,11 +1,12 @@
-var excelList = "EXCEL Ideas";
+"use strict";
 
+var excelList = "Idea";
 var getListItems = "GetListItems";
 
 var ActiveFlyout;
 var ActiveCategory;
 
-$().SPServices.defaults.webURL = "https://teams.aexp.com/sites/teamsitewendy/WASTE"; // URL of the target Web
+$().SPServices.defaults.webURL = "https://teams.aexp.com/sites/excel/"; // URL of the target Web
 $().SPServices.defaults.listName = excelList; // Name of the list for list
 
 // Enable support of cross domain origin request
@@ -88,10 +89,7 @@ function refresh()
 
 	$("#refreshimg").attr('src', "images/refresh.png");
 
-	//var val=getYearFilter();
-	//	$('#header1').append(val);
-
-
+	
 }
 
 // --------------------------------------------------------------------
@@ -107,28 +105,9 @@ function init()
 		System.Gadget.Flyout.show = false;
 		System.Gadget.settingsUI = "settings.html";
 
-		System.Gadget.onSettingsClosed = SettingsClosed;
-
 	}
 }
 
-// --------------------------------------------------------------------
-// Handle the Settings dialog closed event.
-// event = System.Gadget.Settings.ClosingEvent argument.
-// --------------------------------------------------------------------
-function SettingsClosed(event)
-{
-	// User hits OK on the settings page.
-	if (event.closeAction == event.Action.commit)
-	{
-		// refresh();
-	}
-	// User hits Cancel on the settings page.
-	else if (event.closeAction == event.Action.cancel)
-	{
-		SetContentText("canceled");
-	}
-}
 
 function settingsHaveChanged()
 {
@@ -154,7 +133,7 @@ function getEXCELData()
 		operation : "GetListItems",
 		async : false,
 		listName : excelList,
-		CAMLViewFields : "<ViewFields Properties='True'><FieldRef Name='Title' /><FieldRef Name='Project_x0020_Status' /><FieldRef Name='Project_x0020_Director' /><FieldRef Name='Project_x0020_Contact' /><FieldRef Name='Project_x0020_VP' /><FieldRef Name='Estimated_x0020_Savings' /><FieldRef Name='EstimatedSavings2012' /><FieldRef Name='EstimatedSavings2013' /><FieldRef Name='EstimatedSavings2014' /><FieldRef Name='EstimatedSavings2015' /><FieldRef Name='Planned_x0020_Implementation_x00' /><FieldRef Name='Revised_x0020_Implementation_x00' /></ViewFields>",
+		CAMLViewFields : "<ViewFields Properties='True'><FieldRef Name='Idea_x0020_Name' /><FieldRef Name='Executor' /><FieldRef Name='Director' /><FieldRef Name='Idea_x0020_Status' /><FieldRef Name='VP' /><FieldRef Name='Total_x0020_Savings' /><FieldRef Name='Planned_x0020_Implementation_x00' /><FieldRef Name='Revised_x0020_Implementation_x00' /></ViewFields>",
 		CAMLQuery : myQuery,
 		completefunc : function (xData, Status)
 		{
@@ -172,21 +151,6 @@ function getEXCELData()
 
 					mapping :
 					{
-						ows_ID :
-						{
-							mappedName : "ID",
-							objectType : "Counter"
-						},
-						ows_Title :
-						{
-							mappedName : "Title",
-							objectType : "Text"
-						},
-						ows_Created :
-						{
-							mappedName : "Created",
-							objectType : "DateTime"
-						}
 					},
 					includeAllAttrs : true
 				}
@@ -198,26 +162,29 @@ function getEXCELData()
 			$('#accordion').empty();
 			$.each(resJson, function (i, excel)
 			{
-				if (excel.Project_x0020_Status != null && $('#' + excel.Project_x0020_Status.replace(/ /g, "_")).length == 0)
+				//alert(excel.ID);
+				if (excel.Idea_x0020_Status != null && $('#' + excel.Idea_x0020_Status.replace(/ /g, "_")).length == 0)
 				{
-					$('#accordion').append('<tbody id=' + excel.Project_x0020_Status.replace(/ /g, "_") + ' class="category"><tr class="contentrow"><td class="arrow">> </td><td onclick="javascript:showFlyout(' + excel.Project_x0020_Status.replace(/ /g, "_") + 'sub)" class="content">' + excel.Project_x0020_Status + '</td><td class="amount" id="amnt"></td></tr></tbody><tbody class="subcategory" id=' + excel.Project_x0020_Status.replace(/ /g, "_") + 'sub></tbody>');
+					$('#accordion').append('<tbody id=' + excel.Idea_x0020_Status.replace(/ /g, "_") + ' class="category"><tr class="contentrow"><td class="arrow">> </td><td onclick="javascript:showFlyout(' + excel.Idea_x0020_Status.replace(/ /g, "_") + 'sub)" class="content">' + excel.Idea_x0020_Status + '</td><td class="amount" id="amnt"></td></tr></tbody><tbody class="subcategory" id=' + excel.Idea_x0020_Status.replace(/ /g, "_") + 'sub></tbody>');
 
-					statuslist.push(excel.Project_x0020_Status.replace(/ /g, "_"));
+					statuslist.push(excel.Idea_x0020_Status.replace(/ /g, "_"));
 
 				}
 				//insert contacts in the accordion
-				$('#' + excel.Project_x0020_Status.replace(/ /g, "_") + 'sub').append('<tr id=' + excel.ID + ' class="idearow"><td class="idea" colspan="2"><a href="https://teams.aexp.com/sites/teamsitewendy/WASTE/Lists/WASTE%20Ideas/dispform.aspx?ID=' + excel.ID + '">' + excel.Title.truncateOnWord(truncatelength) + '</a></td><td class="ideaamount">$ ' + getMoney(getIdeaAmount(excel)) + '</td></tr>');
+				$('#' + excel.Idea_x0020_Status.replace(/ /g, "_") + 'sub').append('<tr id=' + excel.ID + ' class="idearow"><td class="idea" colspan="2"><a href="https://teams.aexp.com/sites/teamsitewendy/WASTE/Lists/WASTE%20Ideas/dispform.aspx?ID=' + excel.ID + '">' + excel.Idea_x0020_Name.truncateOnWord(truncatelength) + '</a></td><td class="ideaamount">$ ' + getMoney(getIdeaAmount(excel)) + '</td></tr>');
 
-				var previousSum = $('#' + excel.Project_x0020_Status.replace(/ /g, "_")).attr("sum");
+				var previousSum = $('#' + excel.Idea_x0020_Status.replace(/ /g, "_")).attr("sum");
 				if (typeof(previousSum) == "undefined")
 					previousSum = 0;
 
+				//alert(previousSum);
 				previousSum = Number(previousSum) + Number(getIdeaAmount(excel));
-				$('#' + excel.Project_x0020_Status.replace(/ /g, "_")).attr("sum", previousSum);
+
+				$('#' + excel.Idea_x0020_Status.replace(/ /g, "_")).attr("sum", previousSum);
 
 				//Calculate heat map based on date
 				var impDate
-				if (excel.Project_x0020_Status == "In Progress")
+				if (excel.Idea_x0020_Status == "In Progress")
 				{
 					if (excel.Revised_x0020_Implementation_x00 !== undefined)
 					{
@@ -392,13 +359,6 @@ function ResizeWindowTo(sElemId)
 	document.body.style.width = nWide;
 }
 
-function rateit()
-{
-	//var body=document.body;
-	//setBodyHeight(body,260);
-
-
-}
 
 function setBodyHeight(body, height)
 {
@@ -462,7 +422,10 @@ function getIdeaAmount(excel)
 
 	if (filterSetting == "nofilter" || filterSetting == "")
 	{
-		return excel.Estimated_x0020_Savings;
+		if(typeof excel.Total_x0020_Savings != 'undefined')		
+			return excel.Total_x0020_Savings;
+		else 
+			return 0;
 	}
 	else if (filterSetting == "currentyear")
 	{
@@ -511,7 +474,8 @@ function getQuery()
 	{
 
 		if (filterSetting == "nofilter" || filterSetting == "")
-			myQuery = "<Query><Where><And><Or><Or><Eq><FieldRef Name='Project_x0020_Contact' /><Value Type='Integer'><UserID/></Value></Eq><Eq><FieldRef Name='Project_x0020_Director' /><Value Type='Integer'><UserID/></Value></Eq></Or><Or><Eq><FieldRef Name='Project_x0020_VP' /><Value Type='Integer'><UserID/></Value></Eq><Eq><FieldRef Name='FTE_x0020_Contributors' /><Value Type='Integer'><UserID/></Value></Eq></Or></Or><Neq><FieldRef Name='Project_x0020_Status' /><Value Type='Text'>Canceled</Value></Neq></And></Where></Query>";
+//			myQuery = "<Query><Where><And><Or><Or><Eq><FieldRef Name='Executor' /><Value Type='Integer'><UserID/></Value></Eq><Eq><FieldRef Name='Director' /><Value Type='Integer'><UserID/></Value></Eq></Or><Or><Eq><FieldRef Name='VP' /><Value Type='Integer'><UserID/></Value></Eq><Eq><FieldRef Name='FTE_x0020_Contributors' /><Value Type='Integer'><UserID/></Value></Eq></Or></Or><Neq><FieldRef Name='Idea_x0020_Status' /><Value Type='Choice'>Canceled</Value></Neq></And></Where></Query>";
+		myQuery = "<Query><Where><And><Or><Or><Eq><FieldRef Name='Executor' /><Value Type='Text'>Crystal Scarborough</Value></Eq><Eq><FieldRef Name='Director' /><Value Type='Integer'><UserID/></Value></Eq></Or><Or><Eq><FieldRef Name='VP' /><Value Type='Integer'><UserID/></Value></Eq><Eq><FieldRef Name='FTE_x0020_Contributors' /><Value Type='Integer'><UserID/></Value></Eq></Or></Or><Neq><FieldRef Name='Idea_x0020_Status' /><Value Type='Choice'>Canceled</Value></Neq></And></Where></Query>";
 		else if (filterSetting == "currentyear")
 		{
 
