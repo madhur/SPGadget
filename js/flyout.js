@@ -6,16 +6,15 @@ function IsGadget()
 
 }
 
-
-	function getTheme()
+function getTheme()
 {
 if (IsGadget())
 	{
 		var selVal = System.Gadget.Settings.readString("theme");
-		if (selVal == "" || selVal=="classic")
+		if (selVal == "" || selVal=="modern")
+			selVal="css/theme-modern.css";
+		else if (selVal=="classic")
 			selVal = "css/theme.css";
-		else if (selVal=="modern")
-		selVal="css/theme-modern.css";
 		
 		return selVal;
 	}
@@ -24,8 +23,6 @@ if (IsGadget())
 
 }
 
-
-	
 	YUI().use('get', function (Y) {
 	   Y.Get.css(getTheme(), function (err) {
 			if (err) {

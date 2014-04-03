@@ -38,8 +38,14 @@ width:100%;
 	font-weight:bold;
 	padding-left:5px;
 	cursor:pointer;
-	
-	 
+ 
+}
+
+.totalamount
+{
+	font-weight:bold;
+	padding-left:5px;
+	cursor:default;
 }
 
 .arrow
@@ -47,8 +53,7 @@ width:100%;
 
 	font-weight:bold;
 	padding-left:10px;
-	
-width:15px;
+	width:15px;
 
 }
 
@@ -100,6 +105,7 @@ font-weight:normal;
 .contentrow
 {
 	height:40px;
+	
 }
 
 .idearow
@@ -108,7 +114,7 @@ font-weight:normal;
 
 }
 
-.content, .amount, .arrow, .idea, .ideaamount
+.content, .amount, .arrow, .idea, .ideaamount, .totalamount
 {
 border-bottom:1pt solid rgb(195,195,121);
 font-size:14px;
@@ -119,6 +125,8 @@ font-size:14px;
 
 height:40px;
 }
+
+
 
 .statusrow
 {
@@ -153,21 +161,20 @@ cursor:pointer;
 
 .header
 {
-	text-align:center;
+	left:0px;
+	right:0px;
 	color:white;
 	font-weight:bold;
 	font-family:Arial;
 	font-size:18px;
 	width:100%;
-
-
+	margin:0;
+	padding:0;
 }
 
 .bottomtable
 {
 height:40px;
-
-
 }
 .bottomrow
 {
@@ -196,7 +203,7 @@ height:40px;
 		background-position: -64px 0;
     }
 	
-	
+
 .ideaicon
 {
 

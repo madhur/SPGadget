@@ -3,7 +3,7 @@ body
 	font-weight:bold;
 	font-family:Arial;
 	height:140px;
-width:400px;
+width:500px;
 padding:0px 0px 0px 0px;
 margin:0px 0px 0px 0px;
 overflow:auto;	
@@ -87,7 +87,7 @@ width:15px;
 padding-right:10px;
 font-weight:normal;
 	text-align:right;
-	width:150px;
+	width:250px;
 
 }
 
@@ -97,7 +97,7 @@ font-weight:normal;
 padding-right:10px;
 font-weight:normal;
 	text-align:right;
-	width:90px;
+	width:250px;
 	border-right:1pt solid rgb(195,195,121);
 
 }

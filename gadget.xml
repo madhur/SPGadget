@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <gadget>
-        <name>EXCEL</name>
+        <name>EXCELGadget</name>
         <namespace>in.co.madhur</namespace>
         <version>1.0.0.0</version>
         <author name="Madhur Ahuja">
@@ -8,7 +8,7 @@
                 <logo src="logo.jpg" />
         </author>
         <copyright>American Express</copyright>
-        <description>EXCEL Gadget</description>-->
+        <description>EXCELGadget</description>-->
      
 	 <icons>
 		<icon height="70" width="70" src="logo.jpg" />
@@ -18,7 +18,6 @@
 
                 <!-- New autoscaleDPI node -->
                 <autoscaleDPI>true</autoscaleDPI>
-
                 <base type="HTML" apiVersion="1.0.0" src="excel.html" />
                 <permissions>Full</permissions>
                 <platform minPlatformVersion="1.0" />

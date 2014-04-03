@@ -14,14 +14,11 @@
 		<script type="text/javascript" src="js/main.js"></script>
 		<script type="text/javascript" src="js/date.js"></script>
 		
-	
-
 		<!--<LINK REL=StyleSheet HREF="css/excel.css" TYPE="text/css" MEDIA=screen>-->
 		<link rel="stylesheet" type="text/css" href="css/excel.css">
 			
 		<link rel="stylesheet" type="text/css" href="css/jquery-ui.min.css">
 		
-
     </head>
     
     <body id="main" onload="init()">
@@ -32,33 +29,32 @@
 	<table class="toprow" cellspacing="0px" cellpadding="0px">
 		<tr>
 			<td></td>
-			<td class="header" id="header1">EXCEL</td>
+			<td class="header" id="header1"><img class="logoimg" src="images/ExcelLogo.jpg" height=40></td>
 			<td class="refresh"><img id="refreshimg" src="images/refresh.png" height=32 width=32></td>
 		</tr>
 	</table>
+	
+	<table id="versionError" class="bottomrow" cellspacing="0px" cellpadding="0px">
+	
+	</table>
+	
 	<table class="statusrow" cellspacing="0px" cellpadding="0px">
 		<tr>
-			<td class="status">Last sync: </td>
+			<td class="status"></td>
 			<td class="time"><span id="lastrefresh"></span></td>
 		</tr>
 	</table>
 
 	<table cellspacing="0px" cellpadding="0px" class="contenttable" id="accordion">
-				
-		
 
 	</table>
-	
-	
-		
-	
 
 
 	<table class="bottomtable" cellspacing="0" cellpadding="0">
 		<tr class="bottomrow">
-			<td class="footer ideaicon"><a href="https://teams.aexp.com/sites/teamsitewendy/WASTE/_layouts/listform.aspx?PageType=8&ListId={68BAA1F6-7B43-4AAF-B821-B9575C263044}&RootFolder="><img src="images/idea.png" title="Submit new idea!"/></a></td>			
-			<td class="footer helpicon"><img src="images/question.png" title="EXCEL Gadget FAQ"/></td>
-			<td class="browsericon"><a href="https://teams.aexp.com/sites/teamsitewendy/WASTE/SitePages/My%20WASTE%20Home.aspx"><img src="images/browser.png" title="Browse EXCEL" /></a></td>
+			<td class="footer ideaicon"><a href="https://teams.aexp.com/sites/excel/SitePages/create.aspx"><img src="images/idea.png" title="Submit new idea!"/></a></td>			
+			<!-- <td class="footer helpicon"><img src="images/question.png" title="EXCEL Gadget FAQ"/></td> -->
+			<td class="browsericon" id="browsericonid"><a href="https://teams.aexp.com/sites/excel"><img src="images/browser.png" title="Browse EXCEL" /></a></td>
 		</tr>
 	</table>
 	<!--<div id="rating">

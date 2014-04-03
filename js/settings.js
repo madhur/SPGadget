@@ -1,6 +1,9 @@
 // Load the setttings to the form
 function initLoad()
 {
+	var today = new Date();
+	var currYear = today.getFullYear();
+	var nextYear = today.getFullYear()+1;
 
 	if (IsGadget())
 	{
@@ -17,6 +20,9 @@ function initLoad()
 		storedVal=System.Gadget.Settings.readString("theme");
 		if (storedVal != "")
 			$("#theme").val(System.Gadget.Settings.readString("theme"));
+			
+		$('#curryear').html("Current Year ("+currYear+")");
+		$('#nxtyear').html("Next Year ("+nextYear+")");		
 	}
 }
 
@@ -40,14 +46,13 @@ function SettingsClosing(event)
 		if (event.closeAction == event.Action.commit)
 		{
 			System.Gadget.Settings.writeString("viewoption", $("#viewoption").val());
+	
 			System.Gadget.Settings.writeString("theme", $("#theme").val());
 			
 			if ($("#onlymyideas").prop('checked'))
 				System.Gadget.Settings.writeString("onlymyideas", 'true');
 			else
 				System.Gadget.Settings.writeString("onlymyideas", 'false');
-				
-			
 			System.Gadget.document.parentWindow.settingsHaveChanged();
 		}
 
