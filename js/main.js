@@ -8,7 +8,7 @@ var versionList = "EXCEL Gadget";
 var ActiveFlyout;
 var ActiveCategory;
 
-$().SPServices.defaults.webURL = "https://teams.aexp.com/sites/excel/"; // URL of the target Web
+$().SPServices.defaults.webURL = "https://teams.aexp.com/sites/excel"; // URL of the target Web
 $().SPServices.defaults.listName = excelList; // Name of the list for list
 
 
@@ -232,7 +232,8 @@ function getEXCELData()
 
 				}
 				//insert contacts in the accordion
-				$('#' + excel.Idea_x0020_Status.replace(/ /g, "_") + 'sub').append('<tr id=' + excel.ID + ' class="idearow"><td class="idea" colspan="2"><a href="https://teams.aexp.com/sites/excel/SitePages/manage.aspx?q=' + excel.ID + '">' + excel.Idea_x0020_Name.truncateOnWord(truncatelength) + '</a></td><td class="ideaamount">$ ' + getMoney(getIdeaAmount(excel)) + '</td></tr>');
+				var ideaAmt = getMoney(getIdeaAmount(excel))+" ";
+				$('#' + excel.Idea_x0020_Status.replace(/ /g, "_") + 'sub').append('<tr id=' + excel.ID + ' class="idearow"><td class="idea" colspan="2"><a href="https://teams.aexp.com/sites/excel/SitePages/manage.aspx?q=' + excel.ID + '">' + excel.Idea_x0020_Name.truncateOnWord(truncatelength) + '</a></td><td class="ideaamount">$ ' + ideaAmt.split(".")[0] + '</td></tr>');
 
 				var previousSum = $('#' + excel.Idea_x0020_Status.replace(/ /g, "_")).attr("sum");
 				if (typeof(previousSum) == "undefined")
@@ -301,13 +302,13 @@ function getEXCELData()
 
 				var sum = $("#" + list).attr("sum");
 				total = total + parseInt(sum);
-				sum = "$ " + getMoney(sum);
+				sum = "$ " + getMoney(sum)+" ";
 	
-				$("#" + list).find('#amnt').html(sum);
+				$("#" + list).find('#amnt').html(sum.split(".")[0]);
 			}
 			);
-			
-			$('#accordion').append('<tbody id="totalsum" class="category"><tr class="contentrow" style="cursor:default;color:white"><td class="arrow">> </td><td  class="totalamount"> Total </td><td class="amount" id="amnt">'+"$ "+getMoney(total)+'</td></tr></tbody>');
+			var totalamount = getMoney(total)+" ";
+			$('#accordion').append('<tbody id="totalsum" class="category"><tr class="contentrow" style="cursor:default;color:white"><td class="arrow">> </td><td  class="totalamount"> Total </td><td class="amount" id="amnt">'+"$ "+totalamount.split(".")[0]+'</td></tr></tbody>');
 		
 		}
 	}
@@ -507,6 +508,7 @@ function getIdeaAmount(excel)
 	{
 		if(typeof excel.Total_x0020_Savings != 'undefined')		
 			return excel.Total_x0020_Savings;
+		
 		else 
 			return 0;
 	}
@@ -523,7 +525,7 @@ function getIdeaAmount(excel)
 		if(getYearValue(excel.SavingsHeader5)==currYear && !isNaN(excel.Savings5))
 			currYearSavings = currYearSavings+parseFloat(excel.Savings5);
 
-		//window.prompt("Current savings "+currYearSavings);		
+		window.prompt("Current savings "+currYearSavings);		
 		return currYearSavings;
 
 		//return excel.EstimatedSavings2013;
@@ -541,7 +543,7 @@ function getIdeaAmount(excel)
 		if(getYearValue(excel.SavingsHeader5)==nextYear && !isNaN(excel.Savings5))
 			nextYearSavings = nextYearSavings+parseFloat(excel.Savings5);
 		
-		//window.prompt("Next savings "+nextYearSavings);			
+		window.prompt("Next savings "+nextYearSavings);			
 		return nextYearSavings;
 		//return excel.EstimatedSavings2014;
 	}
