@@ -525,7 +525,6 @@ function getIdeaAmount(excel)
 		if(getYearValue(excel.SavingsHeader5)==currYear && !isNaN(excel.Savings5))
 			currYearSavings = currYearSavings+parseFloat(excel.Savings5);
 
-		window.prompt("Current savings "+currYearSavings);		
 		return currYearSavings;
 
 		//return excel.EstimatedSavings2013;
@@ -543,7 +542,6 @@ function getIdeaAmount(excel)
 		if(getYearValue(excel.SavingsHeader5)==nextYear && !isNaN(excel.Savings5))
 			nextYearSavings = nextYearSavings+parseFloat(excel.Savings5);
 		
-		window.prompt("Next savings "+nextYearSavings);			
 		return nextYearSavings;
 		//return excel.EstimatedSavings2014;
 	}
